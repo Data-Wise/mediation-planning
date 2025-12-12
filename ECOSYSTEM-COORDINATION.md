@@ -211,14 +211,44 @@ jobs:
 
 ## Package Locations
 
-| Package | GitHub | Local Development |
-|---------|--------|-------------------|
-| medfit | github.com/data-wise/medfit | /Users/dt/.claude-worktrees/medfit/ |
-| probmed | github.com/data-wise/probmed | GoogleDrive/packages/probmed/ |
-| RMediation | github.com/data-wise/rmediation | GoogleDrive/packages/rmediation/ |
-| medrobust | github.com/data-wise/medrobust | GoogleDrive/packages/medrobust/ |
-| medsim | github.com/data-wise/medsim | GoogleDrive/packages/medsim/ |
-| mediationverse | github.com/data-wise/mediationverse | (to be created) |
+| Package | GitHub | Website | Local Development |
+|---------|--------|---------|-------------------|
+| medfit | [data-wise/medfit](https://github.com/data-wise/medfit) | [Website](https://data-wise.github.io/medfit/) | GoogleDrive/packages/medfit/ |
+| probmed | [data-wise/probmed](https://github.com/data-wise/probmed) | [Website](https://data-wise.github.io/probmed/) | GoogleDrive/packages/probmed/ |
+| RMediation | [data-wise/rmediation](https://github.com/data-wise/rmediation) | [Website](https://data-wise.github.io/rmediation/) | GoogleDrive/packages/rmediation/ |
+| medrobust | [data-wise/medrobust](https://github.com/data-wise/medrobust) | [Website](https://data-wise.github.io/medrobust/) | GoogleDrive/packages/medrobust/ |
+| medsim | [data-wise/medsim](https://github.com/data-wise/medsim) | [Website](https://data-wise.github.io/medsim/) | GoogleDrive/packages/medsim/ |
+| mediationverse | [data-wise/mediationverse](https://github.com/data-wise/mediationverse) | [Website](https://data-wise.github.io/mediationverse/) | GoogleDrive/packages/mediationverse/ |
+
+---
+
+## Website Standards
+
+All package websites follow consistent mediationverse branding:
+
+### Navbar Structure
+All packages include these menus:
+- **Home** | **Reference** | **Articles** | **Ecosystem** | **Status** | **News** | **GitHub**
+
+### Ecosystem Dropdown
+Links to all packages:
+- mediationverse (Meta-package)
+- medfit (Foundation)
+- probmed (P_med Effect Size)
+- RMediation (Confidence Intervals)
+- medrobust (Sensitivity Analysis)
+- medsim (Simulation Infrastructure)
+
+### Status Dropdown
+Links to:
+- Package Status Dashboard (STATUS.md)
+- Development Roadmap
+- Contributing Guide
+
+### Styling
+- **Primary Color**: #0054AD (Academic blue)
+- **Fonts**: Inter, Montserrat, Fira Code
+- **Theme**: Bootstrap 5 with Litera bootswatch
 
 ---
 

@@ -6,13 +6,14 @@ Use this checklist at the beginning of each month to maintain ecosystem health.
 
 ## Quick Links
 
-| Package | GitHub | CI Status | Website |
-|---------|--------|-----------|---------|
-| medfit | [repo](https://github.com/data-wise/medfit) | [actions](https://github.com/data-wise/medfit/actions) | [docs](https://data-wise.github.io/medfit/) |
-| probmed | [repo](https://github.com/data-wise/probmed) | [actions](https://github.com/data-wise/probmed/actions) | [docs](https://data-wise.github.io/probmed/) |
-| RMediation | [repo](https://github.com/data-wise/rmediation) | [actions](https://github.com/data-wise/rmediation/actions) | [docs](https://data-wise.github.io/rmediation/) |
-| medrobust | [repo](https://github.com/data-wise/medrobust) | [actions](https://github.com/data-wise/medrobust/actions) | [docs](https://data-wise.github.io/medrobust/) |
-| medsim | [repo](https://github.com/data-wise/medsim) | [actions](https://github.com/data-wise/medsim/actions) | [docs](https://data-wise.github.io/medsim/) |
+| Package | GitHub | CI Status | Website | Status Dashboard |
+|---------|--------|-----------|---------|------------------|
+| medfit | [repo](https://github.com/data-wise/medfit) | [actions](https://github.com/data-wise/medfit/actions) | [docs](https://data-wise.github.io/medfit/) | [dashboard](https://github.com/data-wise/mediationverse/blob/main/STATUS.md) |
+| probmed | [repo](https://github.com/data-wise/probmed) | [actions](https://github.com/data-wise/probmed/actions) | [docs](https://data-wise.github.io/probmed/) | [dashboard](https://github.com/data-wise/mediationverse/blob/main/STATUS.md) |
+| RMediation | [repo](https://github.com/data-wise/rmediation) | [actions](https://github.com/data-wise/rmediation/actions) | [docs](https://data-wise.github.io/rmediation/) | [dashboard](https://github.com/data-wise/mediationverse/blob/main/STATUS.md) |
+| medrobust | [repo](https://github.com/data-wise/medrobust) | [actions](https://github.com/data-wise/medrobust/actions) | [docs](https://data-wise.github.io/medrobust/) | [dashboard](https://github.com/data-wise/mediationverse/blob/main/STATUS.md) |
+| medsim | [repo](https://github.com/data-wise/medsim) | [actions](https://github.com/data-wise/medsim/actions) | [docs](https://data-wise.github.io/medsim/) | [dashboard](https://github.com/data-wise/mediationverse/blob/main/STATUS.md) |
+| mediationverse | [repo](https://github.com/data-wise/mediationverse) | [actions](https://github.com/data-wise/mediationverse/actions) | [docs](https://data-wise.github.io/mediationverse/) | [dashboard](https://github.com/data-wise/mediationverse/blob/main/STATUS.md) |
 
 ---
 
