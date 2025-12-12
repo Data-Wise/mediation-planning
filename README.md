@@ -11,7 +11,7 @@ Technical documentation for the MediationVerse R package ecosystem.
 | [PROJECT-BOARD.md](https://github.com/Data-Wise/mediation-planning) | r-packages/ | Daily ADHD tasks |
 | [NOW.md](https://github.com/Data-Wise/data-wise) | data-wise/planning/ | Current focus |
 | **This repo** | mediation-planning/ | Technical coordination |
-| [GitHub Projects](https://github.com/orgs/Data-Wise/projects) | GitHub | Issue tracking |
+| [GitHub Projects](https://github.com/users/Data-Wise/projects/1) | GitHub | Issue tracking |
 
 ---
 
