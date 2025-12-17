@@ -5,6 +5,8 @@ All notable changes to mediation-planning are documented here.
 ## 2025-12-17
 
 ### Added
+- IDEAS.md - Collection of ideas and future directions for ecosystem
+- TODOS.md - Active tasks and pending items across all packages
 - COORDINATION-HUB-BRAINSTORM.md - Options for using mediation-planning as central coordination hub
   - 6 categories: Status sync, Dashboards, Change coordination, Progress tracking, ADHD-friendly, Wild ideas
   - Top recommendations: medstatus script, /ecosystem slash command, mednow suggestion system
