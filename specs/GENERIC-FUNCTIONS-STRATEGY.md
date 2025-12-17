@@ -26,7 +26,8 @@ This document proposes a unified generic function strategy for the mediationvers
 3. [Proposed Generic Functions](#proposed-generic-functions)
 4. [Naming Conventions](#naming-conventions)
 5. [Implementation Priority](#implementation-priority)
-6. [Design Decisions Needed](#design-decisions-needed)
+6. [ADHD-Friendly API Design](#adhd-friendly-api-design) ← NEW
+7. [Design Decisions Needed](#design-decisions-needed) (7 decisions)
 
 ---
 
@@ -396,7 +397,142 @@ x <- nie(med, ci = TRUE)
 
 ---
 
+## ADHD-Friendly API Design
+
+### The Problem
+
+Complex APIs create cognitive barriers:
+- Too many functions → decision paralysis
+- Inconsistent naming → can't remember which to use
+- No obvious entry point → where do I start?
+- Context switching penalty → losing flow state
+
+### Option A: "One Function to Start" Pattern
+
+**Core idea:** Single entry point that guides you to what you need.
+
+```r
+# ONE function to remember: med()
+result <- med(data, treatment = "X", mediator = "M", outcome = "Y")
+
+# Everything flows from there with tab-completion
+result |> effects()      # All effects at once
+result |> nie()          # If you want specific
+result |> summary()      # Detailed view
+result |> tidy()         # Tibble format
+result |> plot()         # Visualize
+```
+
+**Implementation:**
+- `med()` is the ONE function users need to remember
+- Returns rich object with all methods attached
+- Tab-completion guides discovery
+- Aliases: `mediation()`, `mediate()` all point to `med()`
+
+**Pros:**
+- Minimal cognitive load to start
+- Natural discovery through tab-completion
+- "Just works" for common cases
+- Easy to teach: "use `med()`, then explore"
+
+**Cons:**
+- `med()` may conflict with other packages
+- Less explicit about what's happening
+- Advanced users may want more control upfront
+
+---
+
+### Option B: "Verb-First Chaining" Pattern
+
+**Core idea:** Clear action verbs that chain naturally.
+
+```r
+# Verbs describe actions clearly
+data |>
+  fit_mediation(X ~ M ~ Y) |>      # Step 1: Fit
+  get_effects() |>                  # Step 2: Extract
+  add_confidence() |>               # Step 3: Add CIs
+  plot_diagram()                    # Step 4: Visualize
+
+# OR one-liner for quick results
+data |> fit_mediation(X ~ M ~ Y) |> quick_summary()
+```
+
+**Implementation:**
+- Verb-first naming: `fit_*`, `get_*`, `add_*`, `plot_*`
+- Each step is explicit and discoverable
+- `quick_summary()` for "just give me the answer"
+- Pipe-friendly throughout
+
+**Pros:**
+- Each step is explicit and understandable
+- Pipe-friendly = easy to read/modify
+- `quick_summary()` satisfies "just tell me" mode
+- Familiar to tidyverse users
+
+**Cons:**
+- More functions to discover
+- Requires understanding piping
+- Longer to type for simple cases
+
+---
+
+### Option C: Hybrid (Recommended)
+
+**Core idea:** Simple entry + explicit chains + quick shortcuts.
+
+```r
+# SIMPLE: One function for 80% of use cases
+med(data, "X", "M", "Y")                    # Defaults to everything
+med(data, "X", "M", "Y") |> quick()         # Just the answer
+
+# EXPLICIT: When you need control
+data |>
+  fit_mediation(y ~ x + m, m ~ x) |>
+  bootstrap(n = 5000) |>
+  effects(type = "natural") |>
+  sensitivity()
+
+# SHORTCUTS: When you know what you want
+nie(result)           # Just NIE
+tidy(result)          # Tibble format
+plot(result)          # Default visualization
+```
+
+**The "Quick" Functions:**
+| Function | Returns | Use When |
+|----------|---------|----------|
+| `med()` | Full result object | Starting any analysis |
+| `quick()` | One-line summary | "Just tell me the answer" |
+| `effects()` | All effects table | Overview of results |
+| `nie()`, `nde()` | Single values | Specific extraction |
+
+**ADHD-Friendly Guarantees:**
+1. **One entry point:** `med()` always works
+2. **Quick escape:** `quick()` or `summary()` for instant answers
+3. **Tab-completion:** All methods discoverable from result object
+4. **Consistent naming:** Same patterns across all packages
+5. **Sensible defaults:** Works without arguments where possible
+
+---
+
 ## Design Decisions Needed
+
+### Decision 0 (NEW): ADHD-Friendly API Pattern
+
+**Options:**
+- A) "One Function to Start" — `med()` as sole entry point
+- B) "Verb-First Chaining" — Explicit pipes with `fit_*`, `get_*`
+- C) Hybrid — `med()` for simple + chains for complex
+
+**Recommendation:** Option C (Hybrid)
+
+**Rationale:**
+- Lowers barrier to entry (Option A benefit)
+- Maintains explicitness for teaching/papers (Option B benefit)
+- `quick()` function satisfies "just tell me" mode
+
+---
 
 ### Decision 1: Rename `extract_mediation()`?
 
@@ -518,11 +654,13 @@ Should existing medrobust functions be renamed for consistency?
 ## Next Steps
 
 1. [ ] Review and approve this strategy document
-2. [ ] Finalize design decisions (6 items above)
+2. [ ] Finalize design decisions (7 items: Decision 0-6)
 3. [ ] Update API-CONTRACTS.md with approved generics
-4. [ ] Implement Phase 1 (P0) generics in medfit
-5. [ ] Create test cases for new generics
-6. [ ] Document in pkgdown reference
+4. [ ] Implement `med()` entry point in medfit (if Decision 0 approved)
+5. [ ] Implement Phase 1 (P0) generics in medfit
+6. [ ] Add `quick()` function for instant results
+7. [ ] Create test cases for new generics
+8. [ ] Document in pkgdown reference
 
 ---
 
