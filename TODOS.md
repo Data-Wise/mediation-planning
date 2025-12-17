@@ -6,47 +6,90 @@ Active tasks and pending items across the mediationverse ecosystem.
 
 ---
 
-## Pending Decisions
+## Ready to Implement (No Blocking Decisions)
+
+### ✅ COMPLETED: medfit Generic Functions (2025-12-17)
+
+| Priority | Task | Status |
+|----------|------|--------|
+| **P0** | Base R generics: `coef()`, `vcov()`, `confint()`, `nobs()` | ✅ Done |
+| **P1** | Effect extractors: `nie()`, `nde()`, `te()`, `pm()`, `paths()` | ✅ Done |
+| **P2** | ADHD entry: `med()`, `quick()` | ✅ Done |
+| **P3** | Tidyverse: `tidy()`, `glance()` | ✅ Done |
+
+**PR:** https://github.com/Data-Wise/medfit/pull/10
+
+### Next: probmed Integration
+
+| Priority | Task | Effort | Notes |
+|----------|------|--------|-------|
+| **P0** | Re-export medfit generics in probmed | 30 min | `nie()`, `nde()` etc. |
+| **P1** | Add `pmed()` extractor in probmed | 30 min | For P_med effect size |
+| **P2** | Integration tests probmed + medfit | 1 hr | Workflow tests |
+
+### Enhancement: Delta Method SEs for Indirect Effects
+
+| Task | Effort | Notes |
+|------|--------|-------|
+| Add delta method SE for `nie` in `tidy()` | 1 hr | Currently shows NA |
+| Add `se_nie()` extractor function | 30 min | Optional convenience |
+| Update documentation with formula | 30 min | Sobel test formula |
+
+**Formula:** SE(ab) = sqrt(a²σ²_b + b²σ²_a)
+
+---
+
+## Pending Decisions (Can Implement While Deciding)
 
 ### API Design Decisions (7 items)
 Location: `specs/GENERIC-FUNCTIONS-STRATEGY.md`
 
-| # | Decision | Recommendation | Status |
-|---|----------|----------------|--------|
-| 0 | ADHD-Friendly API Pattern | Hybrid (Option C) | PENDING |
-| 1 | Rename `extract_mediation()`? | Keep both (alias) | PENDING |
-| 2 | Effect extraction approach | Separate: `nie()`, `nde()` | PENDING |
-| 3 | `boot()` naming conflict | Keep `bootstrap_mediation()` + alias | PENDING |
-| 4 | Which aliases to provide | Short + long only | PENDING |
-| 5 | `confint()` vs `ci()` | Keep both | PENDING |
-| 6 | medrobust renames | Add aliases, keep originals | PENDING |
+| # | Decision | Recommendation | Can Implement? |
+|---|----------|----------------|----------------|
+| 0 | ADHD-Friendly API Pattern | Hybrid (Option C) | Yes - start with `med()` |
+| 1 | Rename `extract_mediation()`? | Keep both (alias) | Yes - add alias later |
+| 2 | Effect extraction approach | Separate: `nie()`, `nde()` | Yes - implement separate |
+| 3 | `boot()` naming conflict | Keep `bootstrap_mediation()` | Already done |
+| 4 | Which aliases to provide | Short + long only | Yes - add after core |
+| 5 | `confint()` vs `ci()` | Keep both | Yes - implement both |
+| 6 | medrobust renames | Add aliases, keep originals | Later (medrobust) |
 
-**Action:** Review and approve decisions to proceed with implementation.
+**Note:** All recommendations are safe to implement. Decisions mostly affect aliases/naming.
 
 ---
 
 ## Immediate TODOs (This Week)
 
-### medfit
-- [ ] Complete extended testing (edge cases, integration)
-- [ ] Merge dev → main to deploy pkgdown site
-- [ ] Implement `med()` entry point (after Decision 0 approved)
-- [ ] Implement `quick()` instant results function
+### medfit (97% → 100%)
+- [x] Add `coef()` method for MediationData
+- [x] Add `vcov()` method for MediationData
+- [x] Add `confint()` method for MediationData
+- [x] Add `nobs()` method for MediationData
+- [x] Add `nie()`, `nde()`, `te()`, `pm()` generics + methods
+- [x] Add `paths()` generic + method
+- [x] Add `med()` and `quick()` ADHD entry points
+- [x] Add `tidy()` and `glance()` tidyverse methods
+- [x] Update pkgdown reference
+- [ ] Merge dev → main (PR #10 open)
 
-### Coordination Hub
+### probmed Integration
+- [ ] Re-export medfit generics (`nie`, `nde`, `te`, `pm`, `paths`)
+- [ ] Add `pmed()` extractor for P_med
+- [ ] Test workflow with medfit objects
+
+### Coordination Hub (Optional)
 - [ ] Create `medstatus` aggregator script
 - [ ] Create `/ecosystem` slash command
-- [ ] Update PROJECT-HUB.md with unified progress view
 
 ---
 
 ## Short-term TODOs (This Month)
 
 ### medfit
+- [ ] Add delta method SE for indirect effect in `tidy()`
 - [ ] Add lmer engine for mixed-effects models
 - [ ] Add brms engine for Bayesian inference
 - [ ] Implement BCa bootstrap confidence intervals
-- [ ] Add `nie()`, `nde()`, `te()`, `pm()` extractors
 
 ### probmed
 - [ ] Add more distribution support
@@ -84,7 +127,7 @@ Location: `specs/GENERIC-FUNCTIONS-STRATEGY.md`
 
 ## Package-Specific TODOs
 
-### medfit (95% complete)
+### medfit (97% complete)
 ```
 Priority: P0 (Foundation - blocks everything)
 Status: Active
@@ -92,11 +135,14 @@ Status: Active
 - [x] S7 class architecture
 - [x] fit_mediation() with GLM engine
 - [x] bootstrap_mediation() (3 methods)
-- [x] 93 tests passing
-- [ ] Extended testing
+- [x] 427 tests passing
+- [x] Generic functions (`coef`, `vcov`, `confint`, `nobs`)
+- [x] Effect extractors (`nie`, `nde`, `te`, `pm`, `paths`)
+- [x] ADHD entry points (`med()`, `quick()`)
+- [x] Tidyverse methods (`tidy()`, `glance()`)
+- [ ] Delta method SE for indirect effects
 - [ ] lmer engine
 - [ ] brms engine
-- [ ] `med()` entry point
 
 ### probmed (55% complete)
 ```
@@ -161,13 +207,18 @@ Status: Active
 |------|------------|-------|
 | probmed CRAN prep | medfit stability | Wait for medfit extended testing |
 | mediationverse release | All packages | Meta-package waits for all |
-| `med()` implementation | Decision 0 approval | Need API design approval |
 
 ---
 
 ## Completed Recently
 
 ### 2025-12-17
+- [x] **medfit: Generic functions complete** (427 tests, PR #10)
+  - Base R: `coef()`, `vcov()`, `confint()`, `nobs()`
+  - Effects: `nie()`, `nde()`, `te()`, `pm()`, `paths()`
+  - ADHD: `med()`, `quick()`
+  - Tidyverse: `tidy()`, `glance()`
+- [x] Updated pkgdown reference sections
 - [x] Reorganized mediation-planning into docs/, specs/, proposals/, tooling/
 - [x] Created CHANGELOG.md
 - [x] Created CLAUDE.md
