@@ -5,6 +5,9 @@ All notable changes to mediation-planning are documented here.
 ## 2025-12-17
 
 ### Added
+- COORDINATION-HUB-BRAINSTORM.md - Options for using mediation-planning as central coordination hub
+  - 6 categories: Status sync, Dashboards, Change coordination, Progress tracking, ADHD-friendly, Wild ideas
+  - Top recommendations: medstatus script, /ecosystem slash command, mednow suggestion system
 - ECOSYSTEM-PACKAGES.md - Comprehensive summary of all 6 mediationverse packages
 - ADHD-Friendly API Design section in GENERIC-FUNCTIONS-STRATEGY.md
   - Option A: "One Function to Start" (`med()` entry point)
