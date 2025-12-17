@@ -5,6 +5,15 @@ All notable changes to mediation-planning are documented here.
 ## 2025-12-17
 
 ### Added
+- S7/S3 Interoperability Guide section in GENERIC-FUNCTIONS-STRATEGY.md
+  - Package setup with `S7::methods_register()` in `.onLoad()`
+  - Pattern 1: S7 methods for base R generics (print, coef, vcov, confint)
+  - Pattern 2: New S7 generics for mediation-specific operations (nie, nde, te, pm, paths)
+  - Pattern 3: S7 generics for S3 classes using `new_S3_class()`
+  - Pattern 4: Accessing underlying data with `S7_data()`
+  - Pattern 5: Inheritance with explicit `super()` calls
+  - Summary table of interoperability tools
+  - Recommended file organization for S7 generics
 - IDEAS.md - Collection of ideas and future directions for ecosystem
 - TODOS.md - Active tasks and pending items across all packages
 - COORDINATION-HUB-BRAINSTORM.md - Options for using mediation-planning as central coordination hub

@@ -26,8 +26,9 @@ This document proposes a unified generic function strategy for the mediationvers
 3. [Proposed Generic Functions](#proposed-generic-functions)
 4. [Naming Conventions](#naming-conventions)
 5. [Implementation Priority](#implementation-priority)
-6. [ADHD-Friendly API Design](#adhd-friendly-api-design) ← NEW
-7. [Design Decisions Needed](#design-decisions-needed) (7 decisions)
+6. [S7/S3 Interoperability Guide](#s7s3-interoperability-guide) ← NEW
+7. [ADHD-Friendly API Design](#adhd-friendly-api-design)
+8. [Design Decisions Needed](#design-decisions-needed) (7 decisions)
 
 ---
 
@@ -394,6 +395,232 @@ x <- nie(med, ci = TRUE)
 | `diagram()` | medfit/mediationverse | New function |
 | `plot()` | All packages | Add S7 methods |
 | `autoplot()` | All packages | Add S7 methods |
+
+---
+
+## S7/S3 Interoperability Guide
+
+S7 is built **on top of S3**, ensuring S7 objects are inherently compatible with existing S3-based code. This section documents how to properly implement generic functions in the mediationverse ecosystem.
+
+### Package Setup: Method Registration
+
+**Critical:** All mediationverse packages must register S7 methods in `.onLoad()`:
+
+```r
+# R/zzz.R
+.onLoad <- function(...) {
+  S7::methods_register()
+}
+```
+
+This dynamic registration replaces traditional static S3/S4 NAMESPACE directives.
+
+### Pattern 1: S7 Methods for Base R Generics
+
+For existing S3 generics (`print`, `summary`, `coef`, `confint`, etc.), register methods directly:
+
+```r
+# R/methods.R
+library(S7)
+
+# Direct registration - no wrapper needed for visible S3 generics
+method(print, MediationData) <- function(x, ...) {
+  cat("Mediation Data Object\n")
+  cat("Treatment:", x@treatment, "\n")
+  cat("Mediator:", x@mediator, "\n")
+  cat("Outcome:", x@outcome, "\n")
+}
+
+method(coef, MediationData) <- function(object, type = "paths", ...) {
+  switch(type,
+    "paths" = c(a = object@a_path, b = object@b_path, cp = object@c_prime),
+    "effects" = c(nie = object@a_path * object@b_path,
+                  nde = object@c_prime,
+                  te = object@a_path * object@b_path + object@c_prime),
+    stop("Unknown type: ", type)
+  )
+}
+
+method(confint, MediationData) <- function(object, parm, level = 0.95, ...) {
+  # Implementation using bootstrap or delta method
+}
+
+method(vcov, MediationData) <- function(object, ...) {
+  object@vcov
+}
+
+method(nobs, MediationData) <- function(object, ...) {
+  object@n_obs
+}
+```
+
+### Pattern 2: New S7 Generics for Mediation-Specific Operations
+
+Define new generics for domain-specific functions:
+
+```r
+# R/generics.R
+
+#' Extract Natural Indirect Effect
+#' @param x A mediation result object
+#' @param ... Additional arguments
+#' @export
+nie <- new_generic("nie", "x")
+
+#' Extract Natural Direct Effect
+#' @export
+nde <- new_generic("nde", "x")
+
+#' Extract Total Effect
+#' @export
+te <- new_generic("te", "x")
+
+#' Extract Proportion Mediated
+#' @export
+pm <- new_generic("pm", "x")
+
+#' Extract Path Coefficients
+#' @export
+paths <- new_generic("paths", "x")
+```
+
+Then register methods for S7 classes:
+
+```r
+# R/methods-effects.R
+
+method(nie, MediationData) <- function(x, ci = FALSE, type = "total", ...) {
+  effect <- x@a_path * x@b_path
+  if (ci) {
+    # Add CI as attributes
+    attr(effect, "ci") <- compute_nie_ci(x, ...)
+    attr(effect, "level") <- 0.95
+  }
+  class(effect) <- c("mediation_effect", "numeric")
+  effect
+}
+
+method(nde, MediationData) <- function(x, ci = FALSE, ...) {
+  effect <- x@c_prime
+  if (ci) attr(effect, "ci") <- compute_nde_ci(x, ...)
+  class(effect) <- c("mediation_effect", "numeric")
+  effect
+}
+
+method(te, MediationData) <- function(x, ci = FALSE, ...) {
+  nie(x, ci = FALSE) + nde(x, ci = FALSE)
+}
+
+method(pm, MediationData) <- function(x, ...) {
+  nie(x) / te(x)
+}
+
+method(paths, MediationData) <- function(x, standardized = FALSE, ...) {
+  p <- c(a = x@a_path, b = x@b_path, c_prime = x@c_prime)
+  if (standardized) p <- standardize_paths(p, x)
+  p
+}
+```
+
+### Pattern 3: S7 Generics for S3 Classes (External Integration)
+
+When integrating with external S3 classes (lavaan, lm, glm), use `new_S3_class()`:
+
+```r
+# R/extract-methods.R
+
+# Wrap S3 classes for S7 dispatch
+lm_class <- new_S3_class("lm")
+glm_class <- new_S3_class("glm")
+lavaan_class <- new_S3_class("lavaan")
+
+# Methods for S3 classes
+method(extract_mediation, lm_class) <- function(object, fit_m,
+                                                 treatment, mediator, ...) {
+  # Extract from two lm models (outcome and mediator)
+  # Returns MediationData S7 object
+}
+
+method(extract_mediation, lavaan_class) <- function(object, ...) {
+  # Extract from SEM model
+  # Returns MediationData S7 object
+}
+```
+
+### Pattern 4: Accessing Underlying Data
+
+Use `S7_data()` when you need the raw base R object:
+
+```r
+# For S7 classes inheriting from base types
+ProductNormal <- new_class("ProductNormal",
+  parent = class_list,
+  properties = list(
+    mu = class_numeric,
+    Sigma = class_matrix
+  )
+)
+
+method(print, ProductNormal) <- function(x, ...) {
+  cat("Product Normal Distribution\n")
+  cat("Means:", x@mu, "\n")
+  # Access underlying list if needed
+  raw <- S7_data(x)
+}
+```
+
+### Pattern 5: Inheritance with super()
+
+When extending classes, use `super()` for explicit parent method calls:
+
+```r
+# SerialMediationData extends MediationData
+SerialMediationData <- new_class("SerialMediationData",
+  parent = MediationData,
+  properties = list(
+    d_paths = class_numeric  # M1->M2, M2->M3, etc.
+  )
+)
+
+# Override nie() but call parent for common parts
+method(nie, SerialMediationData) <- function(x, ...) {
+  # For serial mediation: NIE = a * d1 * d2 * ... * b
+  # Call parent's validation first
+  parent_check <- nie(super(x, to = MediationData))
+
+  # Compute serial-specific NIE
+  serial_nie <- x@a_path * prod(x@d_paths) * x@b_path
+  class(serial_nie) <- c("mediation_effect", "numeric")
+  serial_nie
+}
+```
+
+### Summary: S7/S3 Interoperability Tools
+
+| Task | Function | When to Use |
+|------|----------|-------------|
+| Register methods | `method(generic, class) <- fn` | All method definitions |
+| Wrap S3 class | `new_S3_class("name")` | Dispatching on external S3 classes |
+| Call parent method | `super(x, to = ParentClass)` | Inheritance override |
+| Access raw data | `S7_data(object)` | Low-level operations |
+| Package setup | `S7::methods_register()` | In `.onLoad()` |
+
+### File Organization for S7 Generics
+
+Recommended file structure for mediationverse packages:
+
+```
+R/
+├── aaa-imports.R          # @importFrom S7 new_class new_generic method
+├── aab-generics.R         # Generic definitions (nie, nde, te, pm, paths)
+├── classes.R              # S7 class definitions
+├── methods-base.R         # Methods for base R generics (coef, vcov, confint)
+├── methods-effects.R      # Methods for effect extraction generics
+├── methods-tidy.R         # Methods for tidyverse generics
+├── extract-lm.R           # extract_mediation methods for lm/glm
+├── extract-lavaan.R       # extract_mediation methods for lavaan
+└── zzz.R                  # .onLoad() with methods_register()
+```
 
 ---
 
