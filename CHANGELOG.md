@@ -5,6 +5,7 @@ All notable changes to mediation-planning are documented here.
 ## 2025-12-17
 
 ### Added
+- ECOSYSTEM-PACKAGES.md - Comprehensive summary of all 6 mediationverse packages
 - ADHD-Friendly API Design section in GENERIC-FUNCTIONS-STRATEGY.md
   - Option A: "One Function to Start" (`med()` entry point)
   - Option B: "Verb-First Chaining" (pipe-friendly `fit_*`, `get_*`)
