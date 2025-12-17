@@ -297,7 +297,7 @@ All packages follow semantic versioning: `MAJOR.MINOR.PATCH`
 
 ## Monthly Ecosystem Sync
 
-See [MONTHLY-CHECKLIST.md](MONTHLY-CHECKLIST.md) for recurring tasks.
+See [MONTHLY-CHECKLIST.md](MONTHLY-CHECKLIST.md) for recurring tasks (in same folder).
 
 ---
 
