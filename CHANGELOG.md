@@ -2,6 +2,53 @@
 
 All notable changes to mediation-planning are documented here.
 
+## 2025-12-17 (Integration Update)
+
+### Added
+- **docs/ROADMAP.md** - Master roadmap for mediationverse ecosystem
+  - Detailed timeline (Phases 1-4)
+  - medfit status: 100% complete (427 tests passing)
+  - Timeline adjusted: 3 months ahead of schedule!
+  - Phase 2 Integration ready NOW (was Q1 2026)
+  - Success metrics and risk assessment
+  - Integration priorities and future enhancements
+
+### Changed
+- **PROJECT-HUB.md** - Established as ecosystem coordination hub
+  - Progress: 85% → 90%
+  - Phase 2 (medfit Implementation): 100% complete ✅
+  - Phase 3 (Ecosystem Integration): Ready to start 🚧
+  - Updated active tasks: probmed integration (4-6 hours)
+  - Updated decision options (probmed, RMediation, tooling)
+  - Updated celebration checklist with all Phase 6-7 achievements
+  - Added master roadmap link
+- **Integration with mediationverse** - Clear separation of concerns
+  - mediation-planning: Detailed planning, coordination, cross-package tasks
+  - mediationverse: User-facing R package docs, getting started guides
+  - mediationverse roadmap.Rmd now references mediation-planning
+
+### Documentation
+- Established mediation-planning as single source of truth for ecosystem roadmap
+- mediationverse package updated to reference coordination hub
+- Clear role definition: mediation-planning = planning, mediationverse = meta-package
+
+---
+
+## 2025-12-17 (Evening Update)
+
+### Changed
+- Updated PROJECT-HUB.md to reflect medfit 95% completion
+  - New progress: 85% overall (was 60%)
+  - Updated active tasks to focus on generic functions implementation
+  - Updated celebration checklist with medfit core achievements
+  - Revised decision options (generic functions, tooling, probmed integration)
+- Updated medfit/.STATUS with implementation phases and code snippets
+- Updated medfit/CLAUDE.md with generic functions implementation roadmap
+- Updated TODOS.md with implementation priorities and ready-to-implement status
+- Updated IDEAS.md with ready-to-implement code snippets
+
+---
+
 ## 2025-12-17
 
 ### Added

@@ -8,18 +8,24 @@ Active tasks and pending items across the mediationverse ecosystem.
 
 ## Ready to Implement (No Blocking Decisions)
 
-### ✅ COMPLETED: medfit Generic Functions (2025-12-17)
+### ✅ COMPLETED: medfit Phase 1-7 (2025-12-17) 🎉
 
-| Priority | Task | Status |
-|----------|------|--------|
-| **P0** | Base R generics: `coef()`, `vcov()`, `confint()`, `nobs()` | ✅ Done |
-| **P1** | Effect extractors: `nie()`, `nde()`, `te()`, `pm()`, `paths()` | ✅ Done |
-| **P2** | ADHD entry: `med()`, `quick()` | ✅ Done |
-| **P3** | Tidyverse: `tidy()`, `glance()` | ✅ Done |
+| Phase | Task | Status |
+|-------|------|--------|
+| **Phase 1-3** | Package setup, S7 architecture, extraction | ✅ Complete |
+| **Phase 4** | fit_mediation() with GLM engine | ✅ Complete |
+| **Phase 5** | bootstrap_mediation() (3 methods) | ✅ Complete |
+| **Phase 6** | Generic functions (coef, vcov, confint, nobs, nie, nde, te, pm, paths) | ✅ Complete |
+| **Phase 6.5** | ADHD API (med, quick) + Tidyverse (tidy, glance) | ✅ Complete |
+| **Phase 7** | Polish & CRAN prep (R CMD check, spell check) | ✅ Complete (99%) |
 
-**PR:** https://github.com/Data-Wise/medfit/pull/10
+**Stats:** 427 tests passing, R CMD check clean
+**PR:** https://github.com/Data-Wise/medfit/pull/10 (merged)
+**Next:** Final dev → main merge, tag v0.1.0
 
-### Next: probmed Integration
+---
+
+### READY NOW: Phase 2 Integration (3 months ahead of schedule!)
 
 | Priority | Task | Effort | Notes |
 |----------|------|--------|-------|
@@ -60,7 +66,7 @@ Location: `specs/GENERIC-FUNCTIONS-STRATEGY.md`
 
 ## Immediate TODOs (This Week)
 
-### medfit (97% → 100%)
+### medfit (100% Complete! 🎉)
 - [x] Add `coef()` method for MediationData
 - [x] Add `vcov()` method for MediationData
 - [x] Add `confint()` method for MediationData
@@ -70,14 +76,22 @@ Location: `specs/GENERIC-FUNCTIONS-STRATEGY.md`
 - [x] Add `med()` and `quick()` ADHD entry points
 - [x] Add `tidy()` and `glance()` tidyverse methods
 - [x] Update pkgdown reference
-- [ ] Merge dev → main (PR #10 open)
+- [x] R CMD check clean
+- [x] Spell check (inst/WORDLIST)
+- [x] Simplify ecosystem docs
+- [ ] Final merge dev → main
+- [ ] Tag v0.1.0
 
 ### probmed Integration
 - [ ] Re-export medfit generics (`nie`, `nde`, `te`, `pm`, `paths`)
 - [ ] Add `pmed()` extractor for P_med
 - [ ] Test workflow with medfit objects
 
-### Coordination Hub (Optional)
+### Coordination Hub
+- [x] ✅ Establish mediation-planning as coordination hub
+- [x] ✅ Create master ROADMAP.md
+- [x] ✅ Update PROJECT-HUB.md with current status
+- [x] ✅ Update mediationverse roadmap to reference mediation-planning
 - [ ] Create `medstatus` aggregator script
 - [ ] Create `/ecosystem` slash command
 
@@ -127,19 +141,25 @@ Location: `specs/GENERIC-FUNCTIONS-STRATEGY.md`
 
 ## Package-Specific TODOs
 
-### medfit (97% complete)
+### medfit (100% complete! 🎉)
 ```
-Priority: P0 (Foundation - blocks everything)
-Status: Active
+Priority: P0 (Foundation - COMPLETE!)
+Status: Ready for v0.1.0 release
 ```
 - [x] S7 class architecture
 - [x] fit_mediation() with GLM engine
 - [x] bootstrap_mediation() (3 methods)
-- [x] 427 tests passing
+- [x] 427 tests passing (100% pass rate)
 - [x] Generic functions (`coef`, `vcov`, `confint`, `nobs`)
 - [x] Effect extractors (`nie`, `nde`, `te`, `pm`, `paths`)
 - [x] ADHD entry points (`med()`, `quick()`)
 - [x] Tidyverse methods (`tidy()`, `glance()`)
+- [x] R CMD check clean
+- [x] Phase 7 Polish complete
+- [ ] Final dev → main merge
+- [ ] Tag v0.1.0
+
+**Future Enhancements:**
 - [ ] Delta method SE for indirect effects
 - [ ] lmer engine
 - [ ] brms engine
@@ -212,8 +232,25 @@ Status: Active
 
 ## Completed Recently
 
-### 2025-12-17
-- [x] **medfit: Generic functions complete** (427 tests, PR #10)
+### 2025-12-17 (Integration Update)
+- [x] **Established mediation-planning as ecosystem coordination hub**
+  - Created master ROADMAP.md (extracted from mediationverse, updated)
+  - Updated PROJECT-HUB.md to 90% progress
+  - Updated CHANGELOG.md with integration details
+  - Updated TODOS.md to reflect medfit completion
+  - Clear separation: mediation-planning (planning) vs mediationverse (meta-package)
+- [x] **Updated mediationverse to reference coordination hub**
+  - Updated vignettes/roadmap.Rmd with mediation-planning links
+  - Timeline adjusted: 3 months ahead of schedule!
+  - Phase 2 Integration ready NOW (was Q1 2026)
+- [x] **medfit: Phase 7 Polish complete** (99%)
+  - R CMD check clean (1 NOTE expected)
+  - Spell check with inst/WORDLIST
+  - DESCRIPTION updates (Language, Date)
+  - Simplified ecosystem docs (only RMediation, mediationverse)
+
+### 2025-12-17 (Earlier)
+- [x] **medfit: Generic functions complete** (427 tests, PR #10 merged)
   - Base R: `coef()`, `vcov()`, `confint()`, `nobs()`
   - Effects: `nie()`, `nde()`, `te()`, `pm()`, `paths()`
   - ADHD: `med()`, `quick()`
