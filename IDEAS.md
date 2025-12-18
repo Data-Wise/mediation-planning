@@ -6,22 +6,55 @@ A collection of ideas, enhancements, and future directions for the mediationvers
 
 ---
 
-## API Design Ideas
+## Implementation Ready (No Blockers)
 
-### ADHD-Friendly API (Decision Pending)
-From `specs/GENERIC-FUNCTIONS-STRATEGY.md`:
+### Phase 1: Base R Generics (medfit) - 30 min
+```r
+# Add to medfit/R/methods-base.R
+method(coef, MediationData) <- function(object, type = "paths", ...)
+method(vcov, MediationData) <- function(object, ...)
+method(confint, MediationData) <- function(object, parm, level = 0.95, ...)
+method(nobs, MediationData) <- function(object, ...)
+```
 
-| Option | Entry Point | Description |
-|--------|-------------|-------------|
-| **A** | `med()` only | Single function → tab-complete discovery |
-| **B** | `fit_mediation()` | Verb-first pipes (`fit_*`, `get_*`) |
-| **C** | Hybrid | `med()` for simple + chains for complex |
+### Phase 2: Effect Extractors (medfit) - 1 hr
+```r
+# Add to medfit/R/generics.R + methods-effects.R
+nie <- new_generic("nie", "x")
+nde <- new_generic("nde", "x")
+te <- new_generic("te", "x")
+pm <- new_generic("pm", "x")
+paths <- new_generic("paths", "x")
+```
 
-**Key functions proposed:**
-- `med()` - ONE function to remember
-- `quick()` - "Just tell me the answer" mode
-- `effects()` - All effects at once
-- `nie()`, `nde()`, `te()`, `pm()` - Individual effect extractors
+### Phase 3: ADHD Entry Point (medfit) - 30 min
+```r
+# Simple wrapper in medfit/R/med.R
+med <- function(data, treatment, mediator, outcome, ...) {
+
+  fit_mediation(
+    formula_y = as.formula(paste(outcome, "~", treatment, "+", mediator)),
+    formula_m = as.formula(paste(mediator, "~", treatment)),
+    data = data, treatment = treatment, mediator = mediator, ...
+  )
+}
+
+quick <- function(x, ...) {
+  # One-line summary: NIE = 0.20 [0.15, 0.25], p < 0.001
+}
+```
+
+---
+
+## API Design (Decided - Option C Hybrid)
+
+| Layer | Functions | Use Case |
+|-------|-----------|----------|
+| **Simple** | `med()`, `quick()` | 80% of analyses |
+| **Standard** | `fit_mediation()`, `bootstrap_mediation()` | Full control |
+| **Extract** | `nie()`, `nde()`, `te()`, `pm()`, `paths()` | Specific values |
+| **Base R** | `coef()`, `vcov()`, `confint()`, `summary()` | R conventions |
+| **Tidy** | `tidy()`, `glance()` | Tibble output |
 
 ---
 
