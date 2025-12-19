@@ -62,6 +62,13 @@ probmed      RMediation      medrobust      (future packages)      |
 - PR #11 merged: https://github.com/Data-Wise/medfit/pull/11
 - Site deployed: https://data-wise.github.io/medfit/
 
+**medfit Website Cleanup:**
+- _pkgdown.yml: Commented out WIP packages (probmed, medrobust, medsim)
+- Website now shows only mature/stable packages (medfit, mediationverse, RMediation)
+- Maintains consistency with README.md
+- PR #12 created: https://github.com/Data-Wise/medfit/pull/12
+- Cleaner public-facing documentation
+
 ---
 
 ## Change Propagation Workflow

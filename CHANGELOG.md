@@ -2,7 +2,7 @@
 
 All notable changes to mediation-planning are documented here.
 
-## 2025-12-19 (Documentation Optimization)
+## 2025-12-19 (Documentation Optimization & Website Cleanup)
 
 ### Changed
 - **medfit/CLAUDE.md** - Optimized for better usability
@@ -18,11 +18,19 @@ All notable changes to mediation-planning are documented here.
   - All CI checks passed (14/15, lint failure pre-existing)
   - Documentation site deployed: https://data-wise.github.io/medfit/
 
+- **medfit/_pkgdown.yml** - Website ecosystem menu cleanup
+  - Commented out WIP packages: probmed, medrobust, medsim
+  - Keeps visible: medfit, mediationverse, RMediation (mature packages only)
+  - Added explanatory comments for future uncomment
+  - PR #12 created: https://github.com/Data-Wise/medfit/pull/12
+  - Maintains consistency with README.md
+
 ### Impact
 - Faster onboarding for new contributors
 - Easier reference lookup for development decisions
 - Better organized guidance without information loss
 - Professional polish for ecosystem foundation package
+- Cleaner public-facing website showing only stable packages
 
 ---
 
