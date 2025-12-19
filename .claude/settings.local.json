@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "mcp__ide__executeCode"
+      "mcp__ide__executeCode",
+      "Bash(code:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh run view:*)",
+      "Bash(gh workflow run:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(gh run watch:*)",
+      "WebFetch(domain:data-wise.github.io)"
     ]
   }
 }

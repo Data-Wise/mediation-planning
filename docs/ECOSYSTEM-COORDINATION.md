@@ -45,12 +45,22 @@ probmed      RMediation      medrobust      (future packages)      |
 
 | Package | Version | Branch | Status |
 |---------|---------|--------|--------|
-| medfit | 0.1.0.9000 | main | Phase 4 (fitting) in progress |
+| medfit | 0.1.0.9000 | main | Phase 7 complete, docs optimized (Dec 19) |
 | probmed | 0.2.0 | main | Awaiting medfit integration |
 | RMediation | 1.5.0 | main | Awaiting medfit integration |
 | medrobust | 0.2.0 | main | In development |
 | medsim | 0.0.0.9000 | main | Phase 2 (visualization) in progress |
 | mediationverse | - | - | Planned for Q2-Q3 2025 |
+
+### Recent Changes (2025-12-19)
+
+**medfit Documentation Optimization:**
+- CLAUDE.md optimized: 1,672 → 538 lines (68% reduction)
+- Improved navigation with Quick Reference section
+- Better organization for faster information lookup
+- All critical guidance preserved
+- PR #11 merged: https://github.com/Data-Wise/medfit/pull/11
+- Site deployed: https://data-wise.github.io/medfit/
 
 ---
 
