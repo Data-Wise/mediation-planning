@@ -286,6 +286,39 @@ A breaking change is ANY change that:
 
 ## Standards Propagation
 
+### Standards Synchronization ⭐ NEW
+
+**Source of Truth:** `~/projects/dev-tools/zsh-configuration/standards/`
+
+**Synced To:**
+- `project-hub/standards/`
+- `mediation-planning/standards/`
+- `dev-planning/standards/`
+
+**Sync Command:**
+```bash
+~/projects/dev-tools/zsh-configuration/scripts/sync-standards.sh
+```
+
+**Check Sync Status:**
+```bash
+# See which version each hub has
+cat ~/projects/project-hub/standards/.version
+cat ~/projects/r-packages/mediation-planning/standards/.version
+cat ~/projects/dev-tools/dev-planning/standards/.version
+```
+
+**When to Sync:**
+- After updating any standard document
+- After creating new standard
+- Weekly (Friday with other reviews)
+- When coordinating major changes
+
+**Version Tracking:**
+- `.version` file in each standards folder
+- Date-based versioning (YYYY-MM-DD)
+- Easy to see if out of sync
+
 ### When Standards Change
 
 **Example:** Website design standards updated
@@ -294,7 +327,12 @@ A breaking change is ANY change that:
 
 1. **Update source:** `zsh-configuration/standards/documentation/WEBSITE-DESIGN-GUIDE.md`
 
-2. **Document change:**
+2. **Run sync script:**
+   ```bash
+   ~/projects/dev-tools/zsh-configuration/scripts/sync-standards.sh
+   ```
+
+3. **Document change:**
    ```markdown
    ## CHANGELOG
 
@@ -304,13 +342,13 @@ A breaking change is ANY change that:
    - See WEBSITE-DESIGN-GUIDE.md
    ```
 
-3. **Identify affected projects:**
+4. **Identify affected projects:**
    ```bash
    find ~/projects -name "mkdocs.yml" -type f
    # Lists all projects with documentation sites
    ```
 
-4. **Create propagation plan:**
+5. **Create propagation plan:**
    ```markdown
    ## Standards Propagation Plan
 
@@ -324,12 +362,13 @@ A breaking change is ANY change that:
    **Timeline:** Week of 2025-12-23
    ```
 
-5. **Track in .planning/NOW.md:**
+6. **Track in .planning/NOW.md:**
    ```markdown
    ## Active Coordination
 
    **Website standards propagation:**
    - Updated: zsh-configuration (✅)
+   - Synced to PM hubs: ✅
    - Pending: project-a, project-b, project-c
    - Deadline: End of week
    ```
