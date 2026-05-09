@@ -1,11 +1,20 @@
 # 📊 Mediation Analysis Research - Project Control Hub
 
-> **Quick Status:** 🟢 Active | **Phase:** Phase 2 Integration Ready | **Progress:** 90%
+> **Quick Status:** 🟢 Active | **Phase:** Phase 2 In Progress | **Progress:** 92%
 
-**Last Updated:** 2025-12-19
-**Current Phase:** medfit Complete - Phase 2 Integration Ready
-**Next Action:** probmed integration with medfit (4-6 hours)
-**Recent:** medfit website cleanup (WIP packages hidden) - PR #12 | CLAUDE.md optimized - PR #11 merged
+**Last Updated:** 2026-05-09
+**Current Phase:** Phase 2 Integration — multi-PR ecosystem hardening underway
+**Next Action:** Review and merge 4 open PRs across the ecosystem (see Open PRs below)
+**Recent:** 2026-05-09 ecosystem hardening session — branch protection across all 5 mediation repos, global git workflow rules aligned with `dev-tools/craft`, medrobust branch hygiene fix, medfit CRAN survey, mediationverse Imports → Suggests fix (PR #2 ✅ green)
+
+### Open PRs (2026-05-09)
+
+| Repo | PR | Status |
+|---|---|---|
+| Data-Wise/mediationverse | [#2](https://github.com/Data-Wise/mediationverse/pull/2) — Imports → Suggests | ✅ All checks green |
+| Data-Wise/medrobust | [#1](https://github.com/Data-Wise/medrobust/pull/1) — Add R-CMD-check + Windows fix | ⚠️ Awaiting CI re-run |
+| Data-Wise/medsim | [#1](https://github.com/Data-Wise/medsim/pull/1) — Add Remotes: field | ⚠️ R-CMD-check not triggering (mystery) |
+| Data-Wise/mediation-planning | [#1](https://github.com/Data-Wise/mediation-planning/pull/1) — Dashboard refresh | 🆕 This PR |
 
 ---
 

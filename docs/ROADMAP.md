@@ -1,7 +1,7 @@
 # mediationverse Development Roadmap
 
-> **Last Updated**: 2025-12-17
-> **Status**: Phase 2 Ready (3 months ahead of schedule!)
+> **Last Updated**: 2026-05-09
+> **Status**: Phase 2 actively underway; ecosystem hardening complete
 
 This is the **master roadmap** for the mediationverse ecosystem. For user-facing overview, see [mediationverse package roadmap](https://data-wise.github.io/mediationverse/articles/roadmap.html).
 
@@ -10,14 +10,29 @@ This is the **master roadmap** for the mediationverse ecosystem. For user-facing
 ## Quick Status
 
 ```
-ACTUAL STATUS (2025-12-17):
-✅ Phase 1: Foundation     100% Complete
-🚧 Phase 2: Integration     Ready to start (was Q1 2026, now Q4 2025!)
-⏸️  Phase 3: Refinement     Q1 2026
-⏸️  Phase 4: Release        Q2 2026
+ACTUAL STATUS (2026-05-09):
+✅ Phase 1: Foundation         100% Complete
+🚧 Phase 2: Integration         In progress — open PRs across 3 repos
+⏸️  Phase 3: Refinement         Q3 2026 (slipped from Q1)
+⏸️  Phase 4: Release            Q4 2026 (slipped from Q2)
 ```
 
-**We are 3 months ahead of the original timeline!**
+**Schedule status**: Foundation finished ahead of plan; Integration phase started Dec 2025 but slipped through Q1-Q2 2026 due to ecosystem-wide tooling work (CI hardening, branch hygiene, dependency model fixes).
+
+### Open PRs (2026-05-09)
+
+- [Data-Wise/medsim#1](https://github.com/Data-Wise/medsim/pull/1) — `Remotes:` field for GitHub-only sibling deps (fixes failing R-CMD-check)
+- [Data-Wise/medrobust#1](https://github.com/Data-Wise/medrobust/pull/1) — Add R-CMD-check workflow + Windows quarto fix
+- [Data-Wise/mediationverse#2](https://github.com/Data-Wise/mediationverse/pull/2) — Imports → Suggests for specialty packages (✅ all CI green)
+
+### 2026-05-09 Ecosystem Hardening (Just Completed)
+
+- ✅ Branch protection added to all 5 mediation repos (PR required, no force, no delete)
+- ✅ Required `ubuntu-latest (release)` status check on medfit, mediationverse, probmed
+- ✅ medrobust: branch renamed from `claude/check-measurement-error-...` to conventional `main`
+- ✅ medrobust: `dev` branch created (was missing)
+- ✅ Global git workflow rules (`~/.claude/CLAUDE.md`) aligned with `dev-tools/craft` as source of truth
+- ✅ medfit CRAN readiness assessment completed — 4-6 hr work + vignette decision pending
 
 ---
 
@@ -95,9 +110,9 @@ Q4 2025                                   Q1 2026              Q2 2026
 
 ---
 
-## Phase 2: Integration (Q4 2025 - READY NOW!) - 🚧 **IN PROGRESS**
+## Phase 2: Integration (Started Dec 2025) - 🚧 **IN PROGRESS**
 
-**Status**: medfit complete, ready for ecosystem integration
+**Status (2026-05-09)**: medfit v0.1.0 complete and tarball-installable. Ecosystem-wide hardening done (branch protection, CI alignment, dependency model). Next: integration testing across packages and merging the open PRs (medsim Remotes:, medrobust R-CMD-check, mediationverse Imports→Suggests).
 
 ### Priority 1: probmed Integration
 
@@ -387,10 +402,11 @@ See [BRANCHING-STRATEGY.md](../specs/BRANCHING-STRATEGY.md) for:
 |------|--------|--------|
 | 2025-12-04 | Initial roadmap created | DT |
 | 2025-12-17 | Updated to reflect medfit completion (3 months ahead!) | DT |
+| 2026-05-09 | Mid-Phase-2 update: ecosystem hardening (branch protection, CI alignment, dependency model fixes); 3 open PRs; medfit CRAN readiness assessed | DT (with Claude) |
 
 ---
 
-**Next Review**: End of Q4 2025 (Dec 31, 2025)
+**Next Review**: End of Q3 2026 (Sep 30, 2026)
 
 **See also:**
 - [PROJECT-HUB.md](../PROJECT-HUB.md) - Coordination dashboard

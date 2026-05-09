@@ -1,8 +1,30 @@
 # Mediationverse TODO List
 
-**Last Updated:** 2025-12-17
+**Last Updated:** 2026-05-09
 
 Active tasks and pending items across the mediationverse ecosystem.
+
+---
+
+## 🔥 Hot — Open PRs Awaiting Action (2026-05-09)
+
+| Repo | PR | Title | Action |
+|---|---|---|---|
+| mediationverse | [#2](https://github.com/Data-Wise/mediationverse/pull/2) | Imports → Suggests | ✅ All green — review + merge to dev |
+| medrobust | [#1](https://github.com/Data-Wise/medrobust/pull/1) | Add R-CMD-check workflow + Windows quarto fix | ⚠️ Verify CI green after Windows fix; merge to dev |
+| medsim | [#1](https://github.com/Data-Wise/medsim/pull/1) | Add `Remotes:` field for GitHub-only deps | ⚠️ R-CMD-check still not triggering; investigate before merge |
+| mediation-planning | [#1](https://github.com/Data-Wise/mediation-planning/pull/1) | Dashboard refresh (this update) | Self-merge after review |
+
+## 🧹 Follow-ups from 2026-05-09 Hardening
+
+- [ ] medfit CRAN prep: vignette decision (move articles → vignettes/ OR update README wording) — 1-3 hr blocker
+- [ ] medfit CRAN prep: delete stale `..Rcheck/` dir, re-run fresh `R CMD check --as-cran`
+- [ ] medfit CRAN prep: drop redundant `Maintainer:` line; add `inst/CITATION` (optional)
+- [ ] medfit CRAN prep: win-builder + R-hub pre-submission checks
+- [ ] Investigate why medsim R-CMD-check workflow won't trigger on PR #1 even after re-enable + multiple empty commits
+- [ ] medrobust: pkgdown workflow failing on main pre-PR — separate fix
+- [ ] RMediation: rename `develop` branch → `dev` for ecosystem consistency (maintenance-mode, low priority)
+- [ ] Clean up `.STATUS.backup` files across all 5 packages (artifact of automated migration)
 
 ---
 
