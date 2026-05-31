@@ -58,9 +58,19 @@ is **never copied** from the original `vcov_mat`. Result: any consumer reading t
 
 ### Why it matters
 
-In a **single-equation SEM** (the common lavaan mediation case), `a` and `b` are estimated jointly
-and **are correlated**; `cov(a, b) ≠ 0`. Dropping it biases the indirect-effect CI (DOP and MC).
-This silently defeats the entire reason RMediation would consume a lavaan fit rather than two `lm`s.
+In a **single-equation SEM** (the common lavaan mediation case), structural paths sharing an
+equation are estimated jointly and **are correlated**, so their covariance is non-zero. Dropping it
+biases the indirect-effect CI (DOP and MC), defeating the reason RMediation would consume a lavaan
+fit rather than two `lm`s.
+
+> **Correction (verified against `lavaan::vcov` during implementation, 2026-05-31):** in a *recursive*
+> model with exogenous X, `cov(a, b)` is in fact **0** — `a` lives in the mediator equation and `b`
+> in the outcome equation, estimated independently even within a single `sem()` call. The genuinely
+> non-zero off-diagonal is **`cov(b, c')`** (both share the outcome equation). The fix copies the
+> full sub-block regardless, so it is correct for whichever off-diagonals are non-zero; the
+> acceptance test asserts the entire `a`/`b`/`c_prime` block equals `lavaan::vcov` (capturing
+> `cov(b, c')`). The original "`cov(a,b) ≠ 0`" framing was the motivating hypothesis; this is the
+> corrected statistical picture.
 
 > Note: the `lm` extractor (`extract-lm.R`) is **correct** — it builds a genuinely block-diagonal
 > vcov from two independent regressions, where `cov(a,b)=0` is true by construction. The bug is
