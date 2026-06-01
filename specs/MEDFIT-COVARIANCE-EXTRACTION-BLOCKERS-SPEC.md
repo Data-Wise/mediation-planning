@@ -133,22 +133,43 @@ A serial mediation extractor (lavaan first; lm/path-by-path optional) that retur
 - `@d_path` ordering and the `d` label strings follow a documented convention (M1→M2, M2→M3, …)
   so RMediation can build `c("a", d_labels, "b")` in the correct product order.
 
-### Open design questions (need decision before implementation)
+### Design decisions (RESOLVED 2026-05-31)
 
-1. **Label convention for `d_path[i]`** — e.g. `"d1"`, `"d21"`, or `"<Mi>~<Mi-1>"`? Must be stable
-   and documented; RMediation Open Question #2 depends on this exact answer.
-2. **lavaan vs lm scope** — single-equation SEM is the natural serial case (joint estimation, real
-   covariances). Is an lm/sequential-regression serial extractor also in scope, or lavaan-only for
-   v1?
-3. **API shape** — extend `extract_mediation()` to auto-detect serial (≥2 mediators) and dispatch,
-   or a separate `extract_mediation_serial()`?
+1. **Label convention for `d_path[i]` — DECIDED: positional `d1, d2, …`.**
+   `d1 = M1→M2`, `d2 = M2→M3`, … i.e. `d[i]` is the i-th `@d_path` slot. Labels are decoupled
+   from variable names and map 1:1 to `@d_path` ordering. RMediation assembles the product order as
+   `c("a", paste0("d", seq_len(k - 1)), "b")`. (Resolves RMediation Open Question #2.)
+2. **lavaan vs lm scope — DECIDED: both lavaan and lm in v1.**
+   lavaan single-equation SEM carries the full (non-zero) off-diagonal covariance among chain paths;
+   the lm/sequential-regression path is block-structured (paths from separate regressions independent
+   by construction). Both must be supported and tested, with their differing covariance structure
+   documented.
+3. **API shape — DECIDED: auto-detect in `extract_mediation()`.**
+   `extract_mediation()` counts mediators and dispatches: `k == 1` → `MediationData`, `k ≥ 2` →
+   `SerialMediationData`. Detection/branching lives in the single entry point; no separate public
+   `extract_mediation_serial()`.
 
 ### Acceptance criteria (Blocker B)
 
-- [ ] A documented extractor produces `SerialMediationData` from a fitted (lavaan) serial model.
-- [ ] `@vcov` is named and includes correct off-diagonal covariances among `a`, `d…`, `b`
-      (validated vs `lavaan::vcov`).
-- [ ] `d_path` ordering + label convention documented and tested.
+- [x] A documented extractor produces `SerialMediationData` from a fitted (lavaan) serial model.
+      *(commit `082f1b9` on `feature/serial-extractor`: `.extract_serial_mediation_lavaan()`,
+      dispatched from `extract_mediation_lavaan()` when `mediator` is a length-≥2 ordered vector.)*
+- [x] `@vcov` is named and includes correct off-diagonal covariances among `a`, `d…`, `b`
+      (validated vs `lavaan::vcov`). *(named `a, d1…, b, c_prime`; tests assert the
+      `vcov[c("a","d1","b"), …]` sub-block for 2- and 3-mediator chains.)*
+- [x] `d_path` ordering + label convention documented and tested.
+      *(positional `d_names <- paste0("d", seq_len(k-1))`, i.e. decision #1 — `d1`=M1→M2, etc.)*
+- [ ] **GAP (open 2026-05-31): lm/sequential-regression serial extractor.** Decision #2 scoped v1 as
+      **lavaan + lm**, but `082f1b9` ships only the lavaan path — no lm serial extractor exists
+      (block-structured `@vcov`, `cov` between separate-equation paths = 0 by construction; must be
+      documented as differing from the lavaan full-covariance case). Until this lands, a serial chain
+      fit with `lm` has no extractor.
+      **→ SPEC'D (2026-05-31, decision-complete, ready to implement):**
+      `medfit/planning/specs/SPEC-lm-serial-extractor-2026-05-31.md`. Resolves the path *toward
+      implementing* (not re-scoping): input API = `mediator_models` list (one entry point, honors
+      decision #3); also fixes the latent simple-lm `cov(b, c')` alias bug; `lm + glm`; ordering
+      cross-check; per-mediator `NA` sigma; covariates document-only. Implementation pending on a
+      `feature/lm-serial-extractor` worktree.
 - [ ] medfit `R CMD check` clean; tests green.
 
 ---
@@ -181,7 +202,17 @@ CRAN submission and can proceed now against the local checkout.
 
 ## 5. Status of the autonomous "implement until spec met" goal
 
-**Halted by design, correctly.** The RMediation covariance spec cannot reach green acceptance
-criteria until Blockers A and B land in medfit. The loop stopped rather than committing code built on
-an unsatisfiable contract. Next actionable unit of work is **medfit Blocker A** (in the medfit repo,
-on a feature branch), pending the go-ahead and the Blocker-B design decisions in §2.
+**Blocker A: DONE** — merged to medfit `dev` via PR #19 (lavaan extractor preserves off-diagonal
+`cov(b, c')`; `print.mediation_effect` dispatch fixed). Not yet on `main` (dev→main release pending).
+
+**Blocker B: LAVAAN DONE, lm PENDING.** The **lavaan** serial extractor is implemented, tested, and
+**merged to medfit `dev`** via PR #20 (commit `082f1b9` + review fixes), satisfying 3 of 4 acceptance
+items (see §2) — positional `d1,d2,…` labels and arity-based auto-dispatch both match the resolved
+decisions. The **medfit `dev` CI is fully green** (the pre-existing lint debt was also cleared, PR #21).
+**One gap remains:** the lm/sequential-regression serial path. It is now **decision-complete and
+spec'd** — `medfit/planning/specs/SPEC-lm-serial-extractor-2026-05-31.md` (input API `mediator_models`
+list; also fixes the simple-lm `cov(b,c')` bug; lm + glm) — and the team chose to **implement** it
+(not re-scope). Implementation pending on a `feature/lm-serial-extractor` worktree.
+
+Once Blocker B is complete, `RMEDIATION-MEDFIT-COVARIANCE-SPEC.md` becomes satisfiable and
+RMediation v1.5.0 is gated only on medfit reaching CRAN.
