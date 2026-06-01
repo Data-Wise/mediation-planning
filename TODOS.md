@@ -8,12 +8,18 @@ Active tasks and pending items across the mediationverse ecosystem.
 
 ## 🔴 Top Priority — medfit Blocker B (serial mediation extractor)
 
-No serial mediation extractor exists in medfit — `SerialMediationData` is only
-constructed in `classes.R` examples, never produced from a fitted model. This
-gates RMediation's serial lavaan pipeline end-to-end. Needs API design:
-- d-label convention (RMediation expects literal `d1..dk`)
-- lavaan-only vs lm/sequential-regression scope
-- `extract_mediation()` auto-dispatch for ≥2 mediators
+**Lavaan serial extractor: DONE** — merged to medfit `dev` (PR #20). `extract_mediation()` now
+returns `SerialMediationData` for `X→M1→…→Mk→Y` (named `a/d1…/b/c_prime` vcov with off-diagonals),
+verified end-to-end against RMediation's `ci_serial_mediation_data()`. The three design questions are
+**resolved**: positional `d1..dk` labels; lavaan + lm scope; `extract_mediation()` arity auto-dispatch
+(`k≥2` → `SerialMediationData`).
+
+**Remaining — lm path only.** The lm/sequential-regression serial extractor is the one open item
+(Blocker B acceptance §4). It is **decision-complete and spec'd**:
+`medfit/planning/specs/SPEC-lm-serial-extractor-2026-05-31.md` (input API = `mediator_models` list;
+also fixes the latent simple-lm `cov(b,c')` bug; `lm + glm`). Implementation pending on a
+`feature/lm-serial-extractor` worktree (ORCHESTRATE plan committed).
+
 Spec: `specs/MEDFIT-COVARIANCE-EXTRACTION-BLOCKERS-SPEC.md`.
 
 ## Also pending
@@ -30,6 +36,8 @@ Spec: `specs/MEDFIT-COVARIANCE-EXTRACTION-BLOCKERS-SPEC.md`.
 |---|---|---|---|
 | rmediation | [#4](https://github.com/Data-Wise/rmediation/pull/4) | Name-based covariance extraction in `ci()` | ✅ Merged → develop |
 | medfit | [#19](https://github.com/Data-Wise/medfit/pull/19) | Blocker A: lavaan off-diagonal cov + print dispatch | ✅ Merged → dev |
+| medfit | [#20](https://github.com/Data-Wise/medfit/pull/20) | Blocker B: lavaan serial mediation extractor | ✅ Merged → dev |
+| medfit | [#21](https://github.com/Data-Wise/medfit/pull/21) | Repo-wide lint cleanup (CI fully green) | ✅ Merged → dev |
 | mediation-planning | [#2](https://github.com/Data-Wise/mediation-planning/pull/2) | Ecosystem proposal + covariance specs | ✅ Merged → main |
 | mediationverse | [#3](https://github.com/Data-Wise/mediationverse/pull/3) | STATUS dashboard refresh | 🆕 Open (docs) |
 
