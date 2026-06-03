@@ -37,7 +37,7 @@ mediation-planning/
 The mediationverse packages live in `~/projects/r-packages/`:
 - `active/medfit` - Core fitting infrastructure
 - `active/probmed` - Probability-based mediation
-- `stable/rmediation` - Production CRAN package
+- `active/rmediation` - Production CRAN package (v1.5.0 in progress)
 
 ## Workflow
 

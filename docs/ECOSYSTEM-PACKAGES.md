@@ -208,7 +208,7 @@ mediationverse (meta)
 |---------|--------|------------|
 | medfit | Data-Wise/medfit | `~/projects/r-packages/active/medfit/` |
 | probmed | Data-Wise/probmed | `~/projects/r-packages/active/probmed/` |
-| RMediation | CRAN | `~/projects/r-packages/stable/rmediation/` |
+| RMediation | CRAN | `~/projects/r-packages/active/rmediation/` |
 | medrobust | Data-Wise/medrobust | `~/projects/r-packages/active/medrobust/` |
 | medsim | Data-Wise/medsim | `~/projects/r-packages/active/medsim/` |
 | mediationverse | Data-Wise/mediationverse | `~/projects/r-packages/active/mediationverse/` |
