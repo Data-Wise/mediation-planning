@@ -1,11 +1,11 @@
 # SPEC: medfit Covariance Extraction Blockers (upstream of RMediation v1.5.0)
 
-**Status:** Draft
+**Status:** ✅ Resolved (medfit side) — both blockers implemented & released in medfit v0.2.0
 **Author:** Davood Tofighi (with Claude Code)
-**Date:** 2026-05-31
-**Affected repo:** `data-wise/medfit` — `R/extract-lavaan.R`, (new) serial extractor
+**Date:** 2026-05-31 · **Last updated:** 2026-06-03
+**Affected repo:** `data-wise/medfit` — `R/extract-lavaan.R`, serial extractor (lavaan + lm/glm)
 **Blocks:** `RMEDIATION-MEDFIT-COVARIANCE-SPEC.md` (RMediation v1.5.0 integration)
-**Verified against:** medfit 0.1.0 source (`extract-lavaan.R` sha `44a02307…`, `classes.R`)
+**Verified against:** medfit 0.1.0 source at spec time; resolved against medfit **0.2.0** (released to `main`, submitted to CRAN)
 
 ---
 
@@ -159,18 +159,14 @@ A serial mediation extractor (lavaan first; lm/path-by-path optional) that retur
       `vcov[c("a","d1","b"), …]` sub-block for 2- and 3-mediator chains.)*
 - [x] `d_path` ordering + label convention documented and tested.
       *(positional `d_names <- paste0("d", seq_len(k-1))`, i.e. decision #1 — `d1`=M1→M2, etc.)*
-- [ ] **GAP (open 2026-05-31): lm/sequential-regression serial extractor.** Decision #2 scoped v1 as
-      **lavaan + lm**, but `082f1b9` ships only the lavaan path — no lm serial extractor exists
-      (block-structured `@vcov`, `cov` between separate-equation paths = 0 by construction; must be
-      documented as differing from the lavaan full-covariance case). Until this lands, a serial chain
-      fit with `lm` has no extractor.
-      **→ SPEC'D (2026-05-31, decision-complete, ready to implement):**
-      `medfit/planning/specs/SPEC-lm-serial-extractor-2026-05-31.md`. Resolves the path *toward
-      implementing* (not re-scoping): input API = `mediator_models` list (one entry point, honors
-      decision #3); also fixes the latent simple-lm `cov(b, c')` alias bug; `lm + glm`; ordering
-      cross-check; per-mediator `NA` sigma; covariates document-only. Implementation pending on a
-      `feature/lm-serial-extractor` worktree.
-- [ ] medfit `R CMD check` clean; tests green.
+- [x] **lm/sequential-regression serial extractor — DONE (closed 2026-06-01).** Shipped in medfit
+      **v0.2.0**: `extract_mediation()` accepts the `mediator_models` list for lm/glm serial chains
+      (one entry point, honors decision #3). `@vcov` is block-diagonal among separate-equation paths
+      with `cov(b, c')` preserved, documented as differing from the lavaan full-covariance case.
+      Decision #2's "lavaan + lm" scope is fully met. (Was spec'd in
+      `medfit/planning/specs/SPEC-lm-serial-extractor-2026-05-31.md`, then implemented + released.)
+- [x] medfit `R CMD check` clean; tests green. *(v0.2.0 CRAN submission: 0 errors / 0 warnings / 1
+      new-submission note.)*
 
 ---
 
@@ -202,17 +198,27 @@ CRAN submission and can proceed now against the local checkout.
 
 ## 5. Status of the autonomous "implement until spec met" goal
 
-**Blocker A: DONE** — merged to medfit `dev` via PR #19 (lavaan extractor preserves off-diagonal
-`cov(b, c')`; `print.mediation_effect` dispatch fixed). Not yet on `main` (dev→main release pending).
+**Blockers A & B: BOTH DONE — RELEASED in medfit v0.2.0 (closed 2026-06-01, verified vs remote).**
+v0.2.0 is tagged and on `origin/main` (PR #27), and is now **submitted to CRAN and awaiting
+acceptance** (resubmission after reviewer round 1 — License→`GPL (>= 3)`, single-quoted package
+names; uploaded 2026-06-03; `R CMD check --as-cran` 0 errors / 0 warnings / 1 new-submission note).
+- **Blocker A** — off-diagonal `cov(b, c')` preserved in the lavaan extractor (PR #19).
+- **Blocker B** — serial extractor ships BOTH paths: lavaan (ordered `mediator` vector) and lm/glm
+  (`mediator_models` list). `@vcov` named `a, d1…, b, c_prime`; lavaan keeps off-diagonals, lm is
+  block-diagonal with `cov(b, c')` preserved. The earlier lm gap is **closed** (implemented, not
+  re-scoped).
 
-**Blocker B: LAVAAN DONE, lm PENDING.** The **lavaan** serial extractor is implemented, tested, and
-**merged to medfit `dev`** via PR #20 (commit `082f1b9` + review fixes), satisfying 3 of 4 acceptance
-items (see §2) — positional `d1,d2,…` labels and arity-based auto-dispatch both match the resolved
-decisions. The **medfit `dev` CI is fully green** (the pre-existing lint debt was also cleared, PR #21).
-**One gap remains:** the lm/sequential-regression serial path. It is now **decision-complete and
-spec'd** — `medfit/planning/specs/SPEC-lm-serial-extractor-2026-05-31.md` (input API `mediator_models`
-list; also fixes the simple-lm `cov(b,c')` bug; lm + glm) — and the team chose to **implement** it
-(not re-scope). Implementation pending on a `feature/lm-serial-extractor` worktree.
+`RMEDIATION-MEDFIT-COVARIANCE-SPEC.md` is now satisfiable: rmediation's serial pipeline
+(`R/ci_medfit.R`) is coded against the `d1,d2,…` name contract medfit v0.2.0 emits. Remaining
+rmediation work: install medfit 0.2.0 locally, verify the serial pipeline end-to-end against the real
+extractor, and add an integration test.
 
-Once Blocker B is complete, `RMEDIATION-MEDFIT-COVARIANCE-SPEC.md` becomes satisfiable and
-RMediation v1.5.0 is gated only on medfit reaching CRAN.
+**RMediation v1.5.0 dependency decision (2026-06-03):** keep medfit in **`Suggests`** (NOT promote to
+`Imports`). `R/ci_medfit.R` already guards every medfit call with `requireNamespace("medfit")`, which
+is the Suggests contract; the only change on CRAN acceptance is dropping the `Remotes:` line and
+pinning `medfit (>= 0.2.0)`. Pre-staged diffs (rmediation + probmed + mediationverse):
+`medfit/planning/CASCADE-cran-flip-2026-06-03.md`. v1.5.0 is gated only on medfit being **accepted**
+on CRAN (upload in flight; daily `medfit-cran-watch` routine polling the CRAN page + Gmail).
+
+**Repo note (2026-06-03):** rmediation moved `r-packages/stable/` → `r-packages/active/` (now under
+active v1.5.0 development; also makes it discoverable to rforge ecosystem tooling).
