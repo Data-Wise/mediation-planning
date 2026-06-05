@@ -51,6 +51,7 @@ probmed      RMediation      medrobust      (future packages)      |
 | medrobust | 0.2.0 | main | In development |
 | medsim | 0.0.0.9000 | main | Phase 2 (visualization) in progress |
 | mediationverse | - | - | Planned for Q2-Q3 2025 |
+| missingmed | 0.1.0 | main | Adopted 2026-06; S4, MI-only, standalone (not yet a meta dep) |
 
 ### Recent Changes (2025-12-19)
 
