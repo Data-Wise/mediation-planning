@@ -229,6 +229,7 @@ medfit 0.1.0 release → probmed integration → RMediation integration → ecos
 | **Master Roadmap** | [docs/ROADMAP.md](docs/ROADMAP.md) |
 | **medfit Package** | ~/projects/r-packages/active/medfit/ |
 | **mediationverse** | ~/projects/r-packages/active/mediationverse/ |
+| **missingmed Package** | ~/projects/r-packages/active/missingmed/ (S4, MI; manuscript: research/Missing Effect) |
 | **PROJECT-BOARD** | ~/projects/r-packages/PROJECT-BOARD.md |
 
 ---
