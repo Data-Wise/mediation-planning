@@ -40,6 +40,9 @@
 | **medrobust** | Sensitivity | S7, dplyr, ggplot2 | EValue, boot | mediationverse |
 | **medsim** | Simulation | parallel, pbapply | medfit, probmed, medrobust | mediationverse |
 | **mediationverse** | Meta | ALL above | - | (end user) |
+| **missingmed** | Missing data (MI) | S4, mice, lavaan, OpenMx | RMediation | — *(standalone; not yet wired into meta)* |
+
+> **missingmed** (adopted 2026-06): companion package to the `missing-effect` manuscript (`~/projects/research/Missing Effect/`). Currently **standalone** — not yet a `mediationverse` dependency. Note it is built on **S4**, unlike the S7 standard adopted by `medfit`/`probmed`/`medrobust`; an S4→S7 alignment is a candidate follow-up before wiring it into the meta-package.
 
 ---
 
