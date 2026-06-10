@@ -1,0 +1,67 @@
+# Mediationverse Ecosystem Manifest
+#
+# Single source of truth for "what packages exist and where they live."
+# Human-readable AND consumed by tooling. NOTE: rforge's discovery today only
+# reads `kind:` from a root `.rforge.yaml` (it discovers packages by walking the
+# filesystem); the richer fields below are the hub/human registry and a
+# forward-looking schema rforge can grow into. See docs/RFORGE-COMMANDS.md.
+#
+# Paths are relative to this file (~/projects/r-packages/mediation-planning/).
+
+ecosystem: mediationverse
+updated: 2026-06-10
+kind: ecosystem            # rforge classification (single | ecosystem | hybrid)
+root: ..                   # ecosystem root rforge walks (~/projects/r-packages/)
+
+packages:
+  - name: medfit
+    path: ../active/medfit
+    role: Foundation — fitting/extraction/bootstrap engine; S7 data classes
+    repo: Data-Wise/medfit
+    cran: submitted          # none | submitted | on-cran   (0.2.1 resubmission pending)
+    status_file: ../active/medfit/.STATUS
+
+  - name: mediationverse
+    path: ../active/mediationverse
+    role: Meta-package — selective loading of the ecosystem
+    repo: Data-Wise/mediationverse
+    cran: none
+    status_file: ../active/mediationverse/.STATUS
+
+  - name: probmed
+    path: ../active/probmed
+    role: P_med effect size; imports medfit
+    repo: Data-Wise/probmed
+    cran: none
+    status_file: ../active/probmed/.STATUS
+
+  - name: rmediation
+    path: ../active/rmediation
+    role: Confidence intervals (DOP/MBCO/MC); uses medfit extraction. Package name RMediation.
+    repo: Data-Wise/rmediation
+    cran: on-cran
+    status_file: ../active/rmediation/.STATUS
+
+  - name: medrobust
+    path: ../active/medrobust
+    role: Sensitivity analysis / robustness; suggests medfit
+    repo: Data-Wise/medrobust
+    cran: none
+    status_file: ../active/medrobust/.STATUS
+
+  - name: medsim
+    path: ../active/medsim
+    role: Simulation infrastructure; suggests all analysis packages
+    repo: Data-Wise/medsim
+    cran: none
+    status_file: ../active/medsim/.STATUS
+
+  - name: missingmed
+    path: ../active/missingmed
+    role: Missing-data mediation (S4, multiple imputation). Adopted 2026-06; standalone.
+    repo: Data-Wise/missingmed
+    cran: none
+    status_file: ../active/missingmed/.STATUS
+
+# Live status / dependency order / CRAN sequence are NOT tracked here by hand.
+# Generate them: cd ~/projects/r-packages && /rforge:status | :deps | :release

@@ -41,34 +41,18 @@ probmed      RMediation      medrobust      (future packages)      |
 | 0.2.x  | 0.3.x   | 1.6.x      | 0.3.x     | 0.2.x  | Planned: lmer support |
 | 1.0.x  | 1.0.x   | 2.0.x      | 1.0.x     | 1.0.x  | Stable release target |
 
-### Current Versions (December 2025)
+### Current Versions — generated, not hand-maintained
 
-| Package | Version | Branch | Status |
-|---------|---------|--------|--------|
-| medfit | 0.1.0.9000 | main | Phase 7 complete, docs optimized (Dec 19) |
-| probmed | 0.2.0 | main | Awaiting medfit integration |
-| RMediation | 1.5.0 | main | Awaiting medfit integration |
-| medrobust | 0.2.0 | main | In development |
-| medsim | 0.0.0.9000 | main | Phase 2 (visualization) in progress |
-| mediationverse | - | - | Planned for Q2-Q3 2025 |
-| missingmed | 0.1.0 | main | Adopted 2026-06; S4, MI-only, standalone (not yet a meta dep) |
-
-### Recent Changes (2025-12-19)
-
-**medfit Documentation Optimization:**
-- CLAUDE.md optimized: 1,672 → 538 lines (68% reduction)
-- Improved navigation with Quick Reference section
-- Better organization for faster information lookup
-- All critical guidance preserved
-- PR #11 merged: https://github.com/Data-Wise/medfit/pull/11
-- Site deployed: https://data-wise.github.io/medfit/
-
-**medfit Website Cleanup:**
-- _pkgdown.yml: Commented out WIP packages (probmed, medrobust, medsim)
-- Website now shows only mature/stable packages (medfit, mediationverse, RMediation)
-- Maintains consistency with README.md
-- PR #12 created: https://github.com/Data-Wise/medfit/pull/12
-- Cleaner public-facing documentation
+> Live per-package versions, branches, and status are **not** tabulated here (they
+> drift). Generate the current snapshot:
+>
+> ```bash
+> cd ~/projects/r-packages && /rforge:status      # or :thorough for the full rollup
+> ```
+>
+> Each package's `.STATUS` file is the source of truth `/rforge:status` reads. The
+> matrix above is *design intent* (which versions are meant to work together), which
+> is why it stays in this prose doc. See [RFORGE-COMMANDS.md](RFORGE-COMMANDS.md).
 
 ---
 
@@ -277,7 +261,7 @@ Links to:
 | Package-specific bugs/features | GitHub Issues in each repo |
 | Ecosystem-wide design discussions | GitHub Discussions in medfit |
 | Breaking change announcements | GitHub Issues in medfit + NEWS.md |
-| Planning documents | /Users/dt/mediation-planning/ |
+| Planning documents | `~/projects/r-packages/mediation-planning/` (this hub) |
 
 ---
 
@@ -319,4 +303,52 @@ See [MONTHLY-CHECKLIST.md](MONTHLY-CHECKLIST.md) for recurring tasks (in same fo
 
 ---
 
-*Last Updated: December 2025*
+## Appendix: medfit ↔ dependents API compatibility
+
+> Merged 2026-06-10 from `medfit/planning/ECOSYSTEM.md` (originally 2025-12-03)
+> during planning consolidation. Kept here as the canonical record of what the
+> medfit foundation provides and how the historic probmed/RMediation integrations
+> were performed. medfit retains a pointer stub.
+
+### What medfit provides
+
+**Classes:** `MediationData`, `SerialMediationData`, `BootstrapResult`,
+`Decomposition` (planned).
+
+**Functions (MVP):** `fit_mediation()`, `extract_mediation()` (lm/glm + lavaan),
+`bootstrap_mediation()`.
+
+**Functions (post-MVP):** `estimate_mediation()` — unified interface with
+`effects = "natural"|"controlled"|"interventional"` and
+`engine = "regression"|"gformula"|"ipw"|"tmle"`.
+
+| Engine | Package | Method | Status |
+|--------|---------|--------|--------|
+| `regression` | (internal) | VanderWeele closed-form | MVP default |
+| `gformula` | CMAverse | G-computation | Planned |
+| `ipw` | CMAverse | Inverse probability weighting | Planned |
+| `tmle` | tmle3 | Targeted learning | Future |
+| `dml` | DoubleML | Double machine learning | Future |
+
+### Integration status (historical)
+
+- **probmed** — ✅ migrated to `medfit::MediationData`; ~1,568 lines of duplicate
+  extraction removed; re-exports `extract_mediation`; `pmed()` methods updated.
+- **RMediation** — ✅ `ci()` methods for `MediationData` / `SerialMediationData`
+  added (dynamic registration in `.onLoad()`); covariance extraction (PR #4).
+- **medrobust** — optional medfit use for naive estimates.
+
+### Coordination points (when changing medfit)
+
+- **Changing `MediationData` / `BootstrapResult`:** check probmed + RMediation
+  uses, update simultaneously, bump MAJOR (breaking). See Semantic Versioning above.
+- **Changing `extract_mediation()` / `bootstrap_mediation()`:** check probmed's
+  formula interface + RMediation's uses; preserve backward compatibility; document
+  in `NEWS.md`.
+- **Adding engines (lmer/brms, or adapters):** add to `Suggests`, follow the
+  `.adapter_template()` contract, register in `.engine_registry` at `.onLoad()`,
+  add skip-if-not-installed tests, announce across dependents.
+
+---
+
+*Last Updated: 2026-06-10 (merged medfit/planning/ECOSYSTEM.md; live versions now via `/rforge:status`)*
