@@ -38,7 +38,14 @@ mediationverse (meta), probmed, RMediation, medrobust, medsim, missingmed.
 - **medfit** at the CRAN gate — 0.2.1 resubmission pending; on acceptance, cascade
   (drop `Data-Wise/medfit` from Remotes, pin `medfit (>=0.2.x)` in
   mediationverse/RMediation Imports). See `../active/medfit/planning/CASCADE-cran-flip-*.md`.
-- **missingmed** adopted (6th analysis package, 2026-06) — Phase 0 (S7 migration) next.
+- **missingmed** — Phase 0 (S4→S7 migration) **in progress**. On the critical path for the
+  *Missing Effect* manuscript: S7 unlocks the named `medfit::MediationData` contract that
+  `rmediation::mbco()`/`medci()` consume, and the **imputation-list contract** (`missingmed#2`) is
+  required because MBCO does not commute with Rubin's rules (per Missing Effect's MBCO-MI memo).
+- **medsim** — new spec `SPEC-medsim-missingdata-generators-2026-06-11.md` (MCAR/MAR/MNAR +
+  nonnormality DGMs + missing-data scenario constructor + MBCO-MI/MC-CI/thin-IPW adapters).
+  Step 0 **interface freeze landed** on `feature/dgm-interface` (signature stubs + red tests +
+  per-workstream kickoffs); 6-workstream parallel build ready. Deps stay in Suggests.
 - Live task list & blockers: [TODOS.md](TODOS.md) + `/rforge:next`.
 
 ---
@@ -82,6 +89,10 @@ mediationverse (meta), probmed, RMediation, medrobust, medsim, missingmed.
 1. Sequential Mediation Framework — ⏸️ planning
 2. Sensitivity Analysis Methods — ⏸️ literature review
 3. Product-of-Coefficients Extensions — ⏸️ mathematical development
+4. **Missing Effect** (missing-data mediation) — 🟢 active (~40%). Headline **decided 2026-06-11**:
+   inference-led — **MBCO-MI vs Monte-Carlo CI** under missingness × nonnormality (estimation =
+   backdrop). **Target journal: Psychological Methods** (fallback MBR → SEM). Stack: medsim
+   (harness) × missingmed (MI) × rmediation (MBCO/MC-CI). Repo `Data-Wise/missing-effect`.
 
 **Target journals:** JASA, Biometrika, Biostatistics (Tier 1); Psychological Methods,
 Journal of Causal Inference (Tier 2).

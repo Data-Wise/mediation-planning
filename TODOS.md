@@ -1,6 +1,6 @@
 # Mediationverse TODO List
 
-**Last Updated:** 2026-05-31
+**Last Updated:** 2026-06-11
 
 Active tasks and pending items across the mediationverse ecosystem.
 
@@ -29,6 +29,27 @@ Spec: `specs/MEDFIT-COVARIANCE-EXTRACTION-BLOCKERS-SPEC.md`.
 - medfit: 3 pre-existing `print.mediation_effect` test concerns resolved via the
   `registerS3method` `.onLoad` fix (PR #19) — watch for recurrence.
 - Optional: RMediation `develop → dev` rename for ecosystem naming consistency.
+
+## 🟢 Missing Effect ⟂ medsim ⟂ missingmed (2026-06-11)
+
+Manuscript `Data-Wise/missing-effect` (~40%, active). Headline **decided**: inference-led —
+**MBCO-MI vs Monte-Carlo CI** under missingness × nonnormality. Target journal **Psychological
+Methods** (fallback MBR → SEM). Three-package stack documented in
+`research/Missing Effect/docs/PACKAGE-FIT-2026-06.md`.
+
+- [ ] **missingmed Phase 0 (S4→S7)** — *in progress*. **Critical path**: S7 unlocks the named
+  `medfit::MediationData` contract for `rmediation::mbco()`/`medci()`.
+- [ ] **missingmed#2 — imputation-list contract** — `mbco()` needs the per-imputation list (MBCO does
+  not commute with Rubin's rules; see Missing Effect `MEMO-MBCO-MI-derivation-2026-06.md`). + rmediation
+  weights hook.
+- [ ] **medsim DGM generators** — `SPEC-medsim-missingdata-generators-2026-06-11.md`. Step 0 interface
+  freeze **landed** on `feature/dgm-interface` (stubs + red tests + `WORKSTREAM-KICKOFFS.md`).
+  6 workstreams (WS-A nonnormal, WS-B amputate, WS-C scenarios, WS-D methods, WS-E analyze, WS-F
+  integrate); A/B/D start now. Deps (`mice`/`missingmed`/`rmediation`) stay in **Suggests**.
+- [ ] **IPW** — thin `method()` wrapper → robustness appendix (not a co-equal arm); missingmed IPW is
+  Phase 1.
+- **Unblock note:** the manuscript is *not* gated on the above — `Missing Effect/code/prototype-d4-mbco.R`
+  already validates D4-MBCO (exact match vs `mitml`). Package work is the productionization track.
 
 ## ✅ Done 2026-05-31 (covariance integration)
 
@@ -259,6 +280,9 @@ Status: Experimental
 - [x] Caching system
 - [ ] Standard scenarios for all packages
 - [ ] Publication-ready tables
+- [ ] Missing-data + nonnormality DGM generators (SPEC-medsim-missingdata-generators-2026-06-11;
+  6-workstream build on `feature/dgm-interface`)
+- [ ] DM-misclassification scenario adapters (PROPOSAL-medsim-dm-integration; deferred)
 
 ### mediationverse (70% complete)
 ```
