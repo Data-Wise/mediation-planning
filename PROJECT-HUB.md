@@ -35,9 +35,10 @@ mediationverse (meta), probmed, RMediation, medrobust, medsim, missingmed.
 
 ## 📌 Current focus (prose; numbers via rforge)
 
-- **medfit** at the CRAN gate — 0.2.1 resubmission pending; on acceptance, cascade
-  (drop `Data-Wise/medfit` from Remotes, pin `medfit (>=0.2.x)` in
-  mediationverse/RMediation Imports). See `../active/medfit/planning/CASCADE-cran-flip-*.md`.
+- **medfit** 0.2.1 **on CRAN** (accepted 2026-06-18); Stage-1 cascade **done** —
+  `Data-Wise/medfit` dropped from Remotes, `medfit (>=0.2.0)` pinned in
+  mediationverse/RMediation/medsim. Next: 0.3.1 → CRAN (held to ~2026-07-18 cadence)
+  to unblock probmed (Imports `medfit (>=0.3.0)`). See `../active/medfit/planning/CASCADE-cran-flip-*.md`.
 - **missingmed** adopted (6th analysis package, 2026-06) — Phase 0 (S7 migration) next.
 - Live task list & blockers: [TODOS.md](TODOS.md) + `/rforge:next`.
 
