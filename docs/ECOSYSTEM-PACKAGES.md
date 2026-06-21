@@ -12,7 +12,7 @@ This document provides a comprehensive summary of all packages in the mediationv
 |---------|---------|--------|------------------|
 | **medfit** | 0.3.1 | Active (CRAN: 0.2.1) | Foundation - model fitting & extraction |
 | **probmed** | 0.0.0.9000 | Active | P_med probabilistic effect size |
-| **RMediation** | 1.4.0 | Stable (CRAN) | CI methods (DOP, MBCO, MC) |
+| **RMediation** | 1.5.0 | Stable (CRAN) | CI methods (DOP, MBCO, MC) |
 | **medrobust** | 0.4.0 | Active | Sensitivity analysis & bounds |
 | **medsim** | 0.0.0.9000 | Experimental | Simulation infrastructure |
 | **mediationverse** | 0.0.0.9000 | Active | Meta-package coordinator |
