@@ -18,7 +18,7 @@ packages:
     path: ../active/medfit
     role: Foundation — fitting/extraction/bootstrap engine; S7 data classes
     repo: Data-Wise/medfit
-    cran: submitted          # none | submitted | on-cran   (0.2.1 resubmission pending)
+    cran: on-cran            # none | submitted | on-cran   (0.2.1 accepted 2026-06-18; 0.3.1 on main/dev, next CRAN held ~2026-07-18)
     status_file: ../active/medfit/.STATUS
 
   - name: mediationverse
