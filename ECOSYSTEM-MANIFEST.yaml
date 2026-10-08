@@ -58,7 +58,7 @@ packages:
 
   - name: missingmed
     path: ../active/missingmed
-    role: Missing-data mediation (S4, multiple imputation). Adopted 2026-06; standalone.
+    role: Missing-data mediation, S7 (multiple imputation and IPW; glm and lavaan engines; MNAR sensitivity). v0.6.0 released 2026-10-08. Adopted 2026-06; dependency leaf (imports medfit and RMediation; nothing imports it).
     repo: Data-Wise/missingmed
     cran: none
     status_file: ../active/missingmed/.STATUS
