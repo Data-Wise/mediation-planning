@@ -120,7 +120,7 @@ bat PROJECT-HUB.md
 | **RMediation** | Distribution methods (CRAN) | [Data-Wise/rmediation](https://github.com/Data-Wise/rmediation) |
 | **medrobust** | Sensitivity analysis | [Data-Wise/medrobust](https://github.com/Data-Wise/medrobust) |
 | **medsim** | Simulation infrastructure | [Data-Wise/medsim](https://github.com/Data-Wise/medsim) |
-| **missingmed** | Missing-data mediation (S4, MI) | [Data-Wise/missingmed](https://github.com/Data-Wise/missingmed) |
+| **missingmed** | Missing-data mediation (S7: MI, IPW, lavaan) | [Data-Wise/missingmed](https://github.com/Data-Wise/missingmed) |
 | **mediationverse** | Meta-package | [Data-Wise/mediationverse](https://github.com/Data-Wise/mediationverse) |
 
 **Websites:**
