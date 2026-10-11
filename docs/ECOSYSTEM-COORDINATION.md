@@ -39,6 +39,7 @@ probmed      RMediation      medrobust      (future packages)      |
 |--------|---------|------------|-----------|--------|--------|
 | 0.1.x  | 0.2.x   | 1.5.x      | 0.2.x     | 0.1.x  | Development (current) |
 | 0.2.x  | 0.3.x   | 1.6.x      | 0.3.x     | 0.2.x  | Planned: lmer support |
+| 0.7.x  | 0.3.x   | 1.7.x      | 0.4.x     | 0.5.x  | Released 2026-10-10 (GitHub) |
 | 1.0.x  | 1.0.x   | 2.0.x      | 1.0.x     | 1.0.x  | Stable release target |
 
 ### Current Versions — generated, not hand-maintained
