@@ -40,7 +40,10 @@ probmed      RMediation      medrobust      (future packages)      |
 | 0.1.x  | 0.2.x   | 1.5.x      | 0.2.x     | 0.1.x  | Development (current) |
 | 0.2.x  | 0.3.x   | 1.6.x      | 0.3.x     | 0.2.x  | Planned: lmer support |
 | 0.7.x  | 0.3.x   | 1.7.x      | 0.4.x     | 0.5.x  | Released 2026-10-10 (GitHub) |
+| 0.8.x  | 0.3.x   | 1.7.x      | 0.4.x     | 0.5.x  | Released 2026-10-11 (GitHub; r-universe verified 2026-10-12) |
 | 1.0.x  | 1.0.x   | 2.0.x      | 1.0.x     | 1.0.x  | Stable release target |
+
+The 0.8.x row retains the 0.7.x dependent version ranges as compatibility intent. [medfit 0.8.0](https://github.com/Data-Wise/medfit/releases/tag/v0.8.0) adds nonlinear native SEM constraints, `mbco_sem(paths = )`, and `SEMFit` methods. Release checks recorded in medfit `.STATUS` passed for probmed and RMediation; mediationverse had 36 passing tests. missingmed was not run for this release because the check environment needed lavaan >= 0.7-3. medfit 0.8.0 is GitHub/r-universe only: CRAN remains at 0.3.2, so RMediation CRAN release work that requires newer medfit features remains blocked. See medfit `planning/specs/GRILL-0.8.0-release-2026-10-11.md` (R1) and `.STATUS` (`release_0.8.0`).
 
 ### Current Versions — generated, not hand-maintained
 
