@@ -1,5 +1,8 @@
 # Mediationverse Ecosystem Coordination
 
+> **Historical design (reviewed 2026-10-26).** Dates and version examples below are from the 2025 plan and are not current; the dependency-compatibility matrix is maintained.
+> For live state use [`ECOSYSTEM-MANIFEST.yaml`](../ECOSYSTEM-MANIFEST.yaml) and [`PROJECT-HUB.md`](../PROJECT-HUB.md); rforge generates dependency order and CRAN sequence.
+
 This document provides coordination guidelines for the mediationverse multi-package ecosystem.
 
 ---
@@ -129,12 +132,7 @@ The 0.8.x row retains the 0.7.x dependent version ranges as compatibility intent
 
 ### Quarterly Release Schedule
 
-| Quarter | Focus | medfit | Dependent Packages |
-|---------|-------|--------|-------------------|
-| Q1 2025 | MVP Release | v0.1.0 | Begin integration |
-| Q2 2025 | Enhancement | v0.2.0 (lmer) | Update to use new features |
-| Q3 2025 | Stabilization | v0.3.0 | Polish and testing |
-| Q4 2025 | CRAN Prep | v1.0.0 | v1.0.0 releases |
+The 2025 quarterly table (medfit v0.1.0 to v1.0.0) was a plan, not the record, and is removed. Current versions, CRAN state and holds: [`ECOSYSTEM-MANIFEST.yaml`](../ECOSYSTEM-MANIFEST.yaml), [`PROJECT-HUB.md`](../PROJECT-HUB.md).
 
 ### Release Checklist (medfit)
 
