@@ -2,6 +2,8 @@
 
 > **Last Updated**: 2026-05-09
 > **Status**: Phase 2 actively underway; ecosystem hardening complete
+>
+> **Historical (reviewed 2026-10-26).** Version and status lines below date from 2026-05 and are not current (for example, medfit is 0.15.0 and RMediation 1.7.0 in the repos). For live state use [`ECOSYSTEM-MANIFEST.yaml`](../ECOSYSTEM-MANIFEST.yaml) and [`PROJECT-HUB.md`](../PROJECT-HUB.md).
 
 This is the **master roadmap** for the mediationverse ecosystem. For user-facing overview, see [mediationverse package roadmap](https://data-wise.github.io/mediationverse/articles/roadmap.html).
 
