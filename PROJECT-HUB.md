@@ -33,13 +33,11 @@ mediationverse (meta), probmed, RMediation, medrobust, medsim, missingmed.
 
 ---
 
-## 📌 Current focus (prose; numbers via rforge)
+## 📌 Current focus (prose; numbers via rforge; reviewed 2026-10-26)
 
-- **medfit** 0.2.1 **on CRAN** (accepted 2026-06-18); Stage-1 cascade **done** —
-  `Data-Wise/medfit` dropped from Remotes, `medfit (>=0.2.0)` pinned in
-  mediationverse/RMediation/medsim. Next: 0.3.1 → CRAN (held to ~2026-07-18 cadence)
-  to unblock probmed (Imports `medfit (>=0.3.0)`). See `../active/medfit/planning/CASCADE-cran-flip-*.md`.
-- **missingmed** adopted (6th analysis package, 2026-06) — **v0.6.0 released 2026-10-08** (S7: MI and IPW, glm and lavaan engines, MNAR sensitivity; on GitHub and r-universe, not CRAN). Dependency leaf: nothing in the ecosystem imports it.
+- **CRAN:** medfit 0.3.2 and RMediation 1.6.1 are the only packages on CRAN. Repo versions are ahead: medfit 0.15.0 (GitHub only, CRAN deferred), RMediation 1.7.0 (CRAN submission on hold). probmed, medrobust, medsim and missingmed are not on CRAN. See each package's `.STATUS`.
+- **Holds:** RMediation (author hold until it and medfit are mature), medrobust (until its manuscript is submitted), probmed (Phase 7 I6 gate failed 2026-10-19). mediationverse is blocked behind them, the last cascade phase.
+- **missingmed** — **v0.10.0 released 2026-10-14** (S7: MI and IPW, glm and lavaan engines, D4-stacked MBCO, MNAR sensitivity; GitHub and r-universe). Dependency leaf. Open gates and forward plan: its `docs/ROADMAP.md`.
 - Live task list & blockers: [TODOS.md](TODOS.md) + `/rforge:next`.
 
 ---
