@@ -2,6 +2,15 @@
 
 All notable changes to mediation-planning are documented here.
 
+## 2026-10-26 (Ecosystem review)
+
+Read-only review of all seven packages (`.STATUS`, DESCRIPTION versions, git state, crandb).
+
+### Changed
+- `ECOSYSTEM-MANIFEST.yaml`: CRAN notes and versions refreshed for every package; missingmed v0.10.0.
+- `PROJECT-HUB.md`: "Current focus" rewritten (CRAN state, holds, missingmed).
+- `TODOS.md`: marked historical (2026-05-31 content); not rewritten.
+
 ## 2026-10-12
 
 ### Changed

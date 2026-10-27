@@ -1,6 +1,6 @@
 # Mediationverse TODO List
 
-**Last Updated:** 2026-05-31
+**Last Updated:** 2026-05-31 (content below is historical; reviewed 2026-10-26, live status is in each package's `.STATUS` and `/rforge:next`)
 
 Active tasks and pending items across the mediationverse ecosystem.
 

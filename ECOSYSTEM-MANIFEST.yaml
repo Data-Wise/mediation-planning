@@ -9,7 +9,7 @@
 # Paths are relative to this file (~/projects/r-packages/mediation-planning/).
 
 ecosystem: mediationverse
-updated: 2026-06-10
+updated: 2026-10-26
 kind: ecosystem            # rforge classification (single | ecosystem | hybrid)
 root: ..                   # ecosystem root rforge walks (~/projects/r-packages/)
 
@@ -18,49 +18,49 @@ packages:
     path: ../active/medfit
     role: Foundation — fitting/extraction/bootstrap engine; S7 data classes
     repo: Data-Wise/medfit
-    cran: on-cran            # none | submitted | on-cran   (0.2.1 accepted 2026-06-18; 0.3.1 on main/dev, next CRAN held ~2026-07-18)
+    cran: on-cran            # none | submitted | on-cran   (CRAN 0.3.2, 2026-07-23; repo 0.15.0 released 2026-10-26 on GitHub only; CRAN deferred, #83 closed 2026-10-22)
     status_file: ../active/medfit/.STATUS
 
   - name: mediationverse
     path: ../active/mediationverse
     role: Meta-package — selective loading of the ecosystem
     repo: Data-Wise/mediationverse
-    cran: none
+    cran: none               # v0.1.0 in DESCRIPTION; BLOCKED, last cascade phase (medrobust on hold, medsim, probmed not on CRAN)
     status_file: ../active/mediationverse/.STATUS
 
   - name: probmed
     path: ../active/probmed
     role: P_med effect size; imports medfit
     repo: Data-Wise/probmed
-    cran: none
+    cran: none               # v0.4.1; status on-hold (Phase 7 I6 gate FAILED 2026-10-19); not submitted
     status_file: ../active/probmed/.STATUS
 
   - name: rmediation
     path: ../active/rmediation
     role: Confidence intervals (DOP/MBCO/MC); uses medfit extraction. Package name RMediation.
     repo: Data-Wise/rmediation
-    cran: on-cran
+    cran: on-cran            # CRAN 1.6.1 (2026-07-21); repo v1.7.0; CRAN submission ON HOLD (author, 2026-08-17; 2026-10-13: until RMediation and medfit are both mature)
     status_file: ../active/rmediation/.STATUS
 
   - name: medrobust
     path: ../active/medrobust
     role: Sensitivity analysis / robustness; suggests medfit
     repo: Data-Wise/medrobust
-    cran: none
+    cran: none               # v0.4.4 released 2026-09-25; CRAN-ready but ON HOLD until its manuscript is submitted
     status_file: ../active/medrobust/.STATUS
 
   - name: medsim
     path: ../active/medsim
     role: Simulation infrastructure; suggests all analysis packages
     repo: Data-Wise/medsim
-    cran: none
+    cran: none               # v0.6.0 released 2026-10-14 (GitHub); blocked for CRAN on medrobust's hold
     status_file: ../active/medsim/.STATUS
 
   - name: missingmed
     path: ../active/missingmed
-    role: Missing-data mediation, S7 (multiple imputation and IPW; glm and lavaan engines; MNAR sensitivity). v0.6.0 released 2026-10-08. Adopted 2026-06; dependency leaf (imports medfit and RMediation; nothing imports it).
+    role: Missing-data mediation, S7 (multiple imputation and IPW; glm and lavaan engines; MNAR sensitivity). v0.10.0 released 2026-10-14 (GitHub and r-universe). Adopted 2026-06; dependency leaf (imports medfit and RMediation; nothing imports it).
     repo: Data-Wise/missingmed
-    cran: none
+    cran: none               # CRAN needs RMediation >= 1.7.1 first (win-builder R-devel fails on 1.6.1's .onLoad under newer S7)
     status_file: ../active/missingmed/.STATUS
 
 # Live status / dependency order / CRAN sequence are NOT tracked here by hand.
