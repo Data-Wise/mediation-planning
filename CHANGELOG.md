@@ -11,6 +11,12 @@ Read-only review of all seven packages (`.STATUS`, DESCRIPTION versions, git sta
 - `PROJECT-HUB.md`: "Current focus" rewritten (CRAN state, holds, missingmed).
 - `TODOS.md`: marked historical (2026-05-31 content); not rewritten.
 
+## 2026-10-12
+
+### Changed
+
+- Added the medfit 0.8.x compatibility row with the existing dependent version ranges, release-check scope, and GitHub/r-universe release channels. Preserved the CRAN 0.3.2 hold and the resulting RMediation release dependency.
+
 ## 2026-06-10 (Planning Consolidation — single hub)
 
 Consolidated ecosystem-wide planning that was scattered across three loci
