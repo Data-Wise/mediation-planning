@@ -1,59 +1,22 @@
 # mediationverse Development Roadmap
 
-> **Last Updated**: 2026-05-09
-> **Status**: Phase 2 actively underway; ecosystem hardening complete
+> **Last Updated**: 2026-11-17 (direction and gates; version and CRAN numbers live in `ECOSYSTEM-MANIFEST.yaml`)
+> **Status**: Integration complete; CRAN cascade gated (see Milestone gates)
 >
-> **Historical (reviewed 2026-10-26).** Version and status lines below date from 2026-05 and are not current (for example, medfit is 0.15.0 and RMediation 1.7.0 in the repos). For live state use [`ECOSYSTEM-MANIFEST.yaml`](../ECOSYSTEM-MANIFEST.yaml) and [`PROJECT-HUB.md`](../PROJECT-HUB.md).
+> **Refreshed 2026-11-17.** Direction, gates and the next-release candidates below are current. Phase 1 keeps its original text as history, and Phases 2 to 4 are replaced by milestone gates; version numbers and CRAN state are intentionally not repeated here, so read them from [`ECOSYSTEM-MANIFEST.yaml`](../ECOSYSTEM-MANIFEST.yaml) and each package's `.STATUS`.
 
 This is the **master roadmap** for the mediationverse ecosystem. For user-facing overview, see [mediationverse package roadmap](https://data-wise.github.io/mediationverse/articles/roadmap.html).
 
 ---
 
-## Quick Status
+## Where things stand (2026-11-17)
 
-```
-ACTUAL STATUS (2026-05-09):
-✅ Phase 1: Foundation         100% Complete
-🚧 Phase 2: Integration         In progress — open PRs across 3 repos
-⏸️  Phase 3: Refinement         Q3 2026 (slipped from Q1)
-⏸️  Phase 4: Release            Q4 2026 (slipped from Q2)
-```
-
-**Schedule status**: Foundation finished ahead of plan; Integration phase started Dec 2025 but slipped through Q1-Q2 2026 due to ecosystem-wide tooling work (CI hardening, branch hygiene, dependency model fixes).
-
-### Open PRs (2026-05-09)
-
-- [Data-Wise/medsim#1](https://github.com/Data-Wise/medsim/pull/1) — `Remotes:` field for GitHub-only sibling deps (fixes failing R-CMD-check)
-- [Data-Wise/medrobust#1](https://github.com/Data-Wise/medrobust/pull/1) — Add R-CMD-check workflow + Windows quarto fix
-- [Data-Wise/mediationverse#2](https://github.com/Data-Wise/mediationverse/pull/2) — Imports → Suggests for specialty packages (✅ all CI green)
-
-### 2026-05-09 Ecosystem Hardening (Just Completed)
-
-- ✅ Branch protection added to all 5 mediation repos (PR required, no force, no delete)
-- ✅ Required `ubuntu-latest (release)` status check on medfit, mediationverse, probmed
-- ✅ medrobust: branch renamed from `claude/check-measurement-error-...` to conventional `main`
-- ✅ medrobust: `dev` branch created (was missing)
-- ✅ Global git workflow rules (`~/.claude/CLAUDE.md`) aligned with `dev-tools/craft` as source of truth
-- ✅ medfit CRAN readiness assessment completed — 4-6 hr work + vignette decision pending
-
----
-
-## Timeline Overview
-
-```
-Original Plan:
-Q4 2025 (Current)    Q1 2026              Q2 2026              Q3 2026
-    |                    |                    |                    |
-    v                    v                    v                    v
-[Foundation]         [Integration]        [Refinement]         [Release]
-
-ACTUAL STATUS:
-Q4 2025                                   Q1 2026              Q2 2026
-    |                                         |                    |
-    v                                         v                    v
-[Foundation ✅]                          [Refinement]         [Release]
-[Integration 🚧 READY NOW!]
-```
+- **Foundation and Integration are done.** medfit, probmed, RMediation, medrobust, medsim and missingmed are
+  developed against the shared medfit infrastructure; each ships GitHub releases (see the manifest for versions).
+- **CRAN is the open front.** Only medfit and RMediation are on CRAN, and both CRAN versions are far behind their
+  GitHub releases. The rest wait on the gates below.
+- **mediationverse** shipped 0.2.0 (registry, citations, sitrep checks), 0.3.0 (provenance, news, attach_all,
+  quiet option) and 0.4.0 (update detection) on 2026-11-16 and 2026-11-17, through GitHub and r-universe, not CRAN.
 
 ---
 
@@ -112,149 +75,37 @@ Q4 2025                                   Q1 2026              Q2 2026
 
 ---
 
-## Phase 2: Integration (Started Dec 2025) - 🚧 **IN PROGRESS**
+## Phase 2 to 4: replaced by milestone gates (2026-11-17)
 
-**Status (2026-05-09)**: medfit v0.1.0 complete and tarball-installable. Ecosystem-wide hardening done (branch protection, CI alignment, dependency model). Next: integration testing across packages and merging the open PRs (medsim Remotes:, medrobust R-CMD-check, mediationverse Imports→Suggests).
+The original Phase 2 (Integration), Phase 3 (Refinement) and Phase 4 (Release) text, with its calendar quarters,
+was removed: Integration finished, and the release dates slipped past what the project controls. What remains is a
+chain of dependencies, not a schedule. Dates are deliberately omitted.
 
-### Priority 1: probmed Integration
+### Milestone gates (CRAN cascade, in order)
 
-**Tasks:**
-- [ ] Add medfit to DESCRIPTION (Imports)
-- [ ] Replace extraction code with `medfit::extract_mediation()`
-- [ ] Replace bootstrap with `medfit::bootstrap_mediation()`
-- [ ] Re-export medfit generics (`nie()`, `nde()`, `te()`, `pm()`, `paths()`)
-- [ ] Add `pmed()` extractor for P_med effect size
-- [ ] Update formula interface to use medfit
-- [ ] Verify backward compatibility
-- [ ] Update all tests and vignettes
-- [ ] Integration tests (probmed + medfit workflow)
+1. **probmed submits.** Needs its Remotes dropped, a version bump and a submission; currently on hold after the
+   Phase 7 I6 gate failed 2026-10-19 (see probmed `.STATUS`).
+2. **medrobust hold lifts.** CRAN-ready, paused until its associated manuscript is submitted; a journal decision,
+   not a technical blocker.
+3. **medsim submits.** Blocked only on medrobust.
+4. **mediationverse submits.** Last: drop the `Remotes:` entries, CRAN-check, submit. Needs probmed, medrobust and
+   medsim on CRAN first.
 
-**Estimate**: 4-6 hours
-**Blockers**: None - medfit is ready
+Side gate: **missingmed** needs a newer RMediation on CRAN (win-builder R-devel fails on 1.6.1's `.onLoad`), and
+RMediation's own submission is on hold until it and medfit are both mature.
 
----
+Order in the original plan was medfit, probmed, medrobust, mediationverse; medfit and RMediation reached CRAN
+earlier and are no longer gates.
 
-### Priority 2: RMediation Integration
+### mediationverse next release (candidates, not a commitment)
 
-**Tasks:**
-- [ ] Add medfit to DESCRIPTION (Imports)
-- [ ] Use `medfit::extract_mediation()` for lavaan
-- [ ] Leverage medfit bootstrap utilities
-- [ ] Update `ci()` function for MediationData class
-- [ ] Maintain CRAN stability (careful testing)
-- [ ] Update documentation
-- [ ] Version bump to 1.5.0
+0.5.0 has no committed theme. Candidates:
 
-**Estimate**: 3-4 hours
-**Blockers**: None - RMediation already CRAN stable
-
----
-
-### Priority 3: medrobust Integration (Optional)
-
-**Tasks:**
-- [ ] Add medfit to DESCRIPTION (Suggests)
-- [ ] Use for naive estimates if beneficial
-- [ ] Document integration patterns
-- [ ] Add short aliases (`sens()`, `bounds()`, `power()`)
-
-**Estimate**: 2-3 hours
-**Blockers**: None
-
----
-
-### Deliverables (Phase 2)
-- medfit 0.1.0 release ✅ (ready pending final merge)
-- probmed 0.2.0 with medfit integration
-- RMediation 1.5.0 with medfit integration
-- Updated integration tests across packages
-
-**Timeline**: Q4 2025 (Dec 2025 - Jan 2026)
-
----
-
-## Phase 3: Refinement (Q1 2026)
-
-### Objectives
-Polish packages for CRAN submission and public release.
-
-### Milestones
-
-#### Package Polishing
-- [ ] Address all R CMD check notes/warnings
-- [ ] Comprehensive testing on multiple platforms (win-builder, rhub)
-- [ ] Performance optimization
-- [ ] Memory profiling and optimization
-- [ ] Security audit
-
-#### Documentation Enhancement
-- [ ] Complete API documentation
-- [ ] Add more examples
-- [ ] Create video tutorials (optional)
-- [ ] Write blog posts
-- [ ] Prepare manuscript drafts
-
-#### mediationverse Meta-Package Enhancement
-- [ ] Update attachment logic for new medfit API
-- [ ] Enhanced conflict detection
-- [ ] Improved startup message with version info
-- [ ] Comprehensive vignettes (getting-started, workflow)
-- [ ] pkgdown website updates
-
-#### User Testing
-- [ ] Beta testing with research collaborators
-- [ ] Gather feedback on API design
-- [ ] Address usability issues
-- [ ] Create FAQ documentation
-
-### Deliverables
-- All packages pass R CMD check on CRAN platforms
-- Complete documentation
-- mediationverse meta-package polished
-- User feedback incorporated
-
-**Timeline**: Q1 2026 (Jan-Mar 2026)
-
----
-
-## Phase 4: Release (Q2 2026)
-
-### Objectives
-Launch packages to CRAN and announce publicly.
-
-### Milestones
-
-#### CRAN Submissions
-- [ ] Submit medfit to CRAN
-- [ ] Submit probmed to CRAN (update)
-- [ ] Submit medrobust to CRAN (new)
-- [ ] Submit mediationverse to CRAN (update)
-- [ ] Address reviewer feedback
-- [ ] Coordinate releases
-
-**Order**: medfit → probmed → medrobust → mediationverse
-
-#### Public Launch
-- [ ] Announcement blog post
-- [ ] Social media campaign (Twitter/Mastodon)
-- [ ] R-bloggers post
-- [ ] Conference presentations (JSM, ENAR)
-- [ ] Workshop materials
-
-#### Long-term Maintenance
-- [ ] Establish release schedule (quarterly)
-- [ ] Set up community guidelines
-- [ ] Create issue templates
-- [ ] Establish code review process
-- [ ] Plan future enhancements
-
-### Deliverables
-- All packages on CRAN
-- Public announcement
-- Workshop materials
-- Maintenance plan
-
-**Timeline**: Q2 2026 (Apr-Jun 2026)
+- More docs-only recipes like `vignettes/first-analysis.qmd` (shipped in dev, PR #42), built on `medfit::med()`.
+- Revisit a unified `mediate()` or pipeline object only when the exit criteria in
+  `mediationverse/planning/DESIGN-mediate-pipeline-2026-11-17.md` are met: no breaking change to `med()` or
+  `fit_mediation()` signatures across three consecutive medfit releases, and a shared result interface agreed by a
+  sibling package.
 
 ---
 
@@ -290,6 +141,8 @@ Launch packages to CRAN and announce publicly.
 ---
 
 ### Integration Priorities Timeline
+
+> Indicative order only. The quarters below date from 2026-05 and are not commitments; see the milestone gates above.
 
 | Quarter | Enhancement |
 |---------|-------------|
@@ -405,10 +258,11 @@ See [BRANCHING-STRATEGY.md](../specs/BRANCHING-STRATEGY.md) for:
 | 2025-12-04 | Initial roadmap created | DT |
 | 2025-12-17 | Updated to reflect medfit completion (3 months ahead!) | DT |
 | 2026-05-09 | Mid-Phase-2 update: ecosystem hardening (branch protection, CI alignment, dependency model fixes); 3 open PRs; medfit CRAN readiness assessed | DT (with Claude) |
+| 2026-11-17 | Refresh: Phase 2 to 4 replaced by milestone gates; mediationverse 0.2.0 to 0.4.0 recorded; 0.5.0 as candidates; versions deferred to the manifest | DT |
 
 ---
 
-**Next Review**: End of Q3 2026 (Sep 30, 2026)
+**Next Review**: when a milestone gate moves (a gate opening or closing), not on a calendar date
 
 **See also:**
 - [PROJECT-HUB.md](../PROJECT-HUB.md) - Coordination dashboard
