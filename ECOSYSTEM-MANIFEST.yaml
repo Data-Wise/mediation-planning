@@ -9,7 +9,7 @@
 # Paths are relative to this file (~/projects/r-packages/mediation-planning/).
 
 ecosystem: mediationverse
-updated: 2026-10-26
+updated: 2026-11-17
 kind: ecosystem            # rforge classification (single | ecosystem | hybrid)
 root: ..                   # ecosystem root rforge walks (~/projects/r-packages/)
 
@@ -18,14 +18,14 @@ packages:
     path: ../active/medfit
     role: Foundation — fitting/extraction/bootstrap engine; S7 data classes
     repo: Data-Wise/medfit
-    cran: on-cran            # none | submitted | on-cran   (CRAN 0.3.2, 2026-07-23; repo 0.15.0 released 2026-10-26 on GitHub only; CRAN deferred, #83 closed 2026-10-22)
+    cran: on-cran            # none | submitted | on-cran   (CRAN 0.3.2, 2026-07-23; repo v0.19.0 released 2026-11-17 on GitHub only; CRAN deferred, #83 closed 2026-10-22)
     status_file: ../active/medfit/.STATUS
 
   - name: mediationverse
     path: ../active/mediationverse
     role: Meta-package — selective loading of the ecosystem
     repo: Data-Wise/mediationverse
-    cran: none               # v0.1.0 in DESCRIPTION; BLOCKED, last cascade phase (medrobust on hold, medsim, probmed not on CRAN)
+    cran: none               # v0.4.0 released 2026-11-17 (GitHub tag and r-universe); BLOCKED for CRAN, last cascade phase (medrobust on hold, medsim, probmed not on CRAN)
     status_file: ../active/mediationverse/.STATUS
 
   - name: probmed
@@ -39,7 +39,7 @@ packages:
     path: ../active/rmediation
     role: Confidence intervals (DOP/MBCO/MC); uses medfit extraction. Package name RMediation.
     repo: Data-Wise/rmediation
-    cran: on-cran            # CRAN 1.6.1 (2026-07-21); repo v1.7.0; CRAN submission ON HOLD (author, 2026-08-17; 2026-10-13: until RMediation and medfit are both mature)
+    cran: on-cran            # CRAN 1.6.1 (2026-07-21); repo v1.11.1 released 2026-11-10; CRAN submission ON HOLD (author, 2026-08-17; 2026-10-13: until RMediation and medfit are both mature)
     status_file: ../active/rmediation/.STATUS
 
   - name: medrobust
