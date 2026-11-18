@@ -15,12 +15,13 @@ The CRAN cascade is an ordered chain of gates, not a task list; the authoritativ
 4. mediationverse: last; drop `Remotes:`, CRAN-check, submit.
 5. missingmed: needs a newer RMediation on CRAN first.
 
-The "Top Priority" Blocker B item below predates this: its lm-path status was not re-verified on 2026-11-17, and
-medfit has shipped extensive serial-mediation work since (see medfit `.STATUS`). Confirm before relying on it.
+The "Top Priority" Blocker B item below is **done** (verified 2026-11-17): the lm/glm serial extractor is implemented
+in medfit (`mediator_models` argument in `extract_mediation()`, `R/extract-lm.R`) and its spec is marked Implemented.
+The section is kept as history.
 
 ---
 
-## 🔴 Top Priority — medfit Blocker B (serial mediation extractor)
+## ✅ Done — medfit Blocker B (serial mediation extractor)
 
 **Lavaan serial extractor: DONE** — merged to medfit `dev` (PR #20). `extract_mediation()` now
 returns `SerialMediationData` for `X→M1→…→Mk→Y` (named `a/d1…/b/c_prime` vcov with off-diagonals),
@@ -28,11 +29,10 @@ verified end-to-end against RMediation's `ci_serial_mediation_data()`. The three
 **resolved**: positional `d1..dk` labels; lavaan + lm scope; `extract_mediation()` arity auto-dispatch
 (`k≥2` → `SerialMediationData`).
 
-**Remaining — lm path only.** The lm/sequential-regression serial extractor is the one open item
-(Blocker B acceptance §4). It is **decision-complete and spec'd**:
+**lm path: DONE** (was the last open item, Blocker B acceptance §4; spec status "Implemented", 2026-05-31):
 `medfit/planning/specs/SPEC-lm-serial-extractor-2026-05-31.md` (input API = `mediator_models` list;
-also fixes the latent simple-lm `cov(b,c')` bug; `lm + glm`). Implementation pending on a
-`feature/lm-serial-extractor` worktree (ORCHESTRATE plan committed).
+also fixes the latent simple-lm `cov(b,c')` bug; `lm + glm`). Implemented on the
+`feature/lm-serial-extractor` branch and merged.
 
 Spec: `specs/MEDFIT-COVARIANCE-EXTRACTION-BLOCKERS-SPEC.md`.
 
