@@ -1,8 +1,22 @@
 # Mediationverse TODO List
 
-**Last Updated:** 2026-05-31 (content below is historical; reviewed 2026-10-26, live status is in each package's `.STATUS` and `/rforge:next`)
+**Last Updated:** 2026-11-17 (the sections below the "Current cross-package state" block are historical; reviewed 2026-11-17, live status is in each package's `.STATUS` and `/rforge:next`)
 
 Active tasks and pending items across the mediationverse ecosystem.
+
+## Current cross-package state (2026-11-17)
+
+The CRAN cascade is an ordered chain of gates, not a task list; the authoritative version is in
+[docs/ROADMAP.md](docs/ROADMAP.md) (milestone gates) and [ECOSYSTEM-MANIFEST.yaml](ECOSYSTEM-MANIFEST.yaml).
+
+1. probmed: on hold after the Phase 7 I6 gate failed 2026-10-19; needs Remotes dropped, a version bump, a submission.
+2. medrobust: CRAN-ready, on hold until its manuscript is submitted.
+3. medsim: blocked only on medrobust.
+4. mediationverse: last; drop `Remotes:`, CRAN-check, submit.
+5. missingmed: needs a newer RMediation on CRAN first.
+
+The "Top Priority" Blocker B item below predates this: its lm-path status was not re-verified on 2026-11-17, and
+medfit has shipped extensive serial-mediation work since (see medfit `.STATUS`). Confirm before relying on it.
 
 ---
 
@@ -277,8 +291,10 @@ Status: Active
 
 | Item | Blocked By | Notes |
 |------|------------|-------|
-| probmed CRAN prep | medfit stability | Wait for medfit extended testing |
-| mediationverse release | All packages | Meta-package waits for all |
+| probmed CRAN submission | Phase 7 I6 gate (failed 2026-10-19) | On hold; see probmed `.STATUS` |
+| medrobust CRAN submission | Its manuscript submission | On hold, not a technical blocker |
+| medsim CRAN submission | medrobust | Blocked only on medrobust |
+| mediationverse CRAN submission | probmed, medrobust, medsim | Last cascade phase; GitHub and r-universe releases (0.4.0) are unaffected |
 
 ---
 
